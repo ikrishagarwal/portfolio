@@ -13,3 +13,20 @@
   @apply text-4xl md:text-9xl font-bold;
   font-family: var(--font-brand);
 }
+
+.sharp-edge {
+  position: relative;
+  clip-path: polygon(6% 0, 95% 0, 100% 10%, 100% 100%, 0 100%, 0 7%);
+  isolation: isolate; /* ensures pseudo stays behind */
+  z-index: 1;
+}
+
+.sharp-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: 2px solid #fff; /* your border color */
+  clip-path: inherit; /* same shape! */
+  z-index: -1;
+}

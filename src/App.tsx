@@ -3,6 +3,7 @@ import { Hero } from "@/sections/Hero";
 import { Works } from "@/sections/Works";
 import { About } from "@/sections/About";
 import { Contact } from "@/sections/Contact";
+import { Footer } from "@/sections/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         </section>
         <section className="hidden md:block w-1/12"></section>
       </section>
+      <Footer />
     </section>
   );
 }
