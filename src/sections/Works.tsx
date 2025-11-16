@@ -29,27 +29,23 @@ export function Works() {
   ];
 
   return (
-    <section className="flex h-auto">
-      <section className="hidden md:block w-1/12"></section>
-      <section className="text-amber-50 px-12 py-20 border border-gray-border border-t-0 flex-1">
-        <h2 className="text-8xl font-bold font-brand text-center">
-          Notable Works
-        </h2>
-        <section className="py-20">
-          {workCards.map((work, index) => (
-            <WorkCard
-              key={work.title}
-              src={work.src}
-              link={work.link}
-              title={work.title}
-              description={work.description}
-              tags={work.tags}
-              index={index}
-            />
-          ))}
-        </section>
+    <section className="text-amber-50 px-12 pt-20 border-b border-gray-border border-t-0 flex-1">
+      <h2 className="text-8xl font-bold font-brand text-center">
+        Notable Works
+      </h2>
+      <section className="py-20">
+        {workCards.map((work, index) => (
+          <WorkCard
+            key={work.title}
+            src={work.src}
+            link={work.link}
+            title={work.title}
+            description={work.description}
+            tags={work.tags}
+            index={index}
+          />
+        ))}
       </section>
-      <section className="hidden md:block w-1/12"></section>
     </section>
   );
 }
