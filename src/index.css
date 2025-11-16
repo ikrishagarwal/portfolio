@@ -8,3 +8,8 @@
   --font-brand: "Brockmann", Tahoma, sans-serif;
   --font-spline-mono: "Spline Sans Mono", Arial, monospace;
 }
+
+.hero-text {
+  @apply text-4xl md:text-9xl font-bold;
+  font-family: var(--font-brand);
+}
