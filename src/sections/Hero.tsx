@@ -1,6 +1,9 @@
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center text-amber-50 text-center px-6 py-20 gap-6 border-b border-b-gray-border">
+    <section
+      id="hero"
+      className="flex flex-col items-center justify-center text-amber-50 text-center px-6 py-20 gap-6 border-b border-b-gray-border"
+    >
       <p>
         <p>
           <span className="text-lg font-spline-mono pr-7">Hi, I'm Krish.</span>

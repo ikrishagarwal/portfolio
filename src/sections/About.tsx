@@ -1,6 +1,9 @@
 export function About() {
   return (
-    <section className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 border-b border-gray-border">
+    <section
+      id="about"
+      className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 border-b border-gray-border"
+    >
       <h1 className="text-8xl font-bold mb-4 font-brand text-center">
         About Me
       </h1>

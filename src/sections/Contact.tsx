@@ -1,6 +1,9 @@
 export function Contact() {
   return (
-    <section className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 flex">
+    <section
+      id="contact"
+      className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 flex"
+    >
       <h1 className="text-8xl font-bold mb-4 font-brand text-center flex-4">
         How about we work on something together?
       </h1>

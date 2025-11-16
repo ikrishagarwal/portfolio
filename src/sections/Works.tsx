@@ -29,7 +29,10 @@ export function Works() {
   ];
 
   return (
-    <section className="text-amber-50 px-12 pt-20 border-b border-gray-border border-t-0 flex-1">
+    <section
+      id="works"
+      className="text-amber-50 px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
+    >
       <h2 className="text-8xl font-bold font-brand text-center">
         Notable Works
       </h2>
