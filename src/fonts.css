@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "Brockmann";
+  src: url("/fonts/brockmann.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
