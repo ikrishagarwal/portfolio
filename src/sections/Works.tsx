@@ -2,9 +2,8 @@ import { useRef } from "react";
 import { WorkCard } from "@/components/WorkCard";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrambleTextPlugin, SplitText, ScrollTrigger } from "gsap/all";
+import { SplitText, ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(ScrambleTextPlugin);
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollTrigger);
 
