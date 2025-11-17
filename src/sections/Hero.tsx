@@ -4,7 +4,7 @@ export function Hero() {
       id="hero"
       className="flex flex-col items-center justify-center text-amber-50 text-center px-6 py-20 gap-6 border-b border-b-gray-border"
     >
-      <p>
+      <div>
         <p>
           <span className="text-lg font-spline-mono pr-7">Hi, I'm Krish.</span>
           <span className="hero-text">Software -</span>
@@ -14,12 +14,12 @@ export function Hero() {
         </p>
         <p>
           <span className="hero-text">& Explorer</span>
-          <p className="max-w-md md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right">
+          <span className="block max-w-md md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right">
             An enthusiastic programmer and explorer, who loves to learn and
             create.
-          </p>
+          </span>
         </p>
-      </p>
+      </div>
     </section>
   );
 }
