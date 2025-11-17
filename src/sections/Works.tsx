@@ -120,7 +120,7 @@ export function Works() {
       </h2>
       <section className="py-20 overflow-x-hidden">
         {workCards.map((work, index) => (
-          <div className="work-card">
+          <div className="work-card" key={index}>
             <WorkCard
               key={work.title}
               src={work.src}
