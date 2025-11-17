@@ -1,4 +1,12 @@
+import { useRef } from "react";
 import { WorkCard } from "@/components/WorkCard";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrambleTextPlugin, SplitText, ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrambleTextPlugin);
+gsap.registerPlugin(SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 export function Works() {
   const workCards = [
@@ -28,25 +36,101 @@ export function Works() {
     },
   ];
 
+  const headingRef = useRef(null);
+
+  useGSAP(() => {
+    if (!headingRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 80%",
+      },
+    });
+
+    const split = new SplitText(headingRef.current, { type: "chars" });
+    tl.fromTo(
+      split.chars,
+      {
+        x: -20,
+        opacity: 0,
+      },
+      {
+        duration: 1,
+        x: 0,
+        opacity: 1,
+        stagger: 0.05,
+        ease: "back.out",
+      }
+    );
+
+    // Animating the cards
+    gsap.set(".work-card", { scale: 0.9 });
+
+    // create a ScrollTrigger for each card
+    gsap.utils.toArray(".work-card").forEach((card, i) => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: card as Element,
+            start: "top 80%",
+            once: true,
+          },
+        })
+        .fromTo(
+          card as Element,
+          {
+            x: i & 1 ? -300 : 300,
+            opacity: 0,
+          },
+          {
+            duration: 0.75,
+            x: 0,
+            opacity: 1,
+            stagger: 0.5,
+            ease: "power2.out",
+          }
+        )
+        .to(
+          card as Element,
+          {
+            scale: 1,
+            stagger: 0.5,
+            ease: "back.out(1.7)",
+          },
+          "<0.75"
+        );
+    });
+
+    return () => {
+      tl.kill();
+    };
+  });
+
   return (
     <section
       id="works"
       className="text-amber-50 px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
     >
-      <h2 className="text-8xl font-bold font-brand text-center">
+      <h2
+        ref={headingRef}
+        className="text-8xl font-bold font-brand text-center"
+      >
         Notable Works
       </h2>
-      <section className="py-20">
+      <section className="py-20 overflow-x-hidden">
         {workCards.map((work, index) => (
-          <WorkCard
-            key={work.title}
-            src={work.src}
-            link={work.link}
-            title={work.title}
-            description={work.description}
-            tags={work.tags}
-            index={index}
-          />
+          <div className="work-card">
+            <WorkCard
+              key={work.title}
+              src={work.src}
+              link={work.link}
+              title={work.title}
+              description={work.description}
+              tags={work.tags}
+              index={index}
+            />
+          </div>
         ))}
       </section>
     </section>
