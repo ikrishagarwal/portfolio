@@ -1,7 +1,10 @@
 import { Time } from "@/components/Time";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { ScrambleTextPlugin } from "gsap/all";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrambleTextPlugin);
 
 export function NavBar() {
   const navRef = useRef<HTMLElement>(null);
@@ -42,19 +45,127 @@ export function NavBar() {
     };
   }, []);
 
+  const nameRef = useRef(null);
+  let nameAnimation: gsap.core.Tween | null = null;
+
+  const animateName = () => {
+    if (!nameRef.current) return;
+    if (nameAnimation) nameAnimation.kill();
+
+    nameAnimation = gsap.to(nameRef.current, {
+      opacity: 0.7,
+      duration: 1.5,
+      ease: "power2.out",
+      scrambleText: {
+        text: "agarwal",
+        chars: "01",
+        speed: 0.3,
+      },
+    });
+  };
+
+  const revertName = () => {
+    if (!nameRef.current) return;
+    if (nameAnimation) nameAnimation.kill();
+
+    gsap.to(nameRef.current, {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.out",
+      onComplete: () => {
+        gsap.set(nameRef.current, { opacity: 0 });
+      },
+    });
+  };
+
+  useEffect(() => {
+    gsap.utils.toArray(".nav-links").forEach((rawLink, i) => {
+      const link = rawLink as HTMLElement;
+      const underline = gsap.utils.toArray(".nav-underline")[
+        i
+      ] as HTMLElement | null;
+      console.log(underline);
+      const tl = gsap.timeline({ paused: true });
+      (link as any).tl = tl;
+
+      if (underline) {
+        tl.fromTo(
+          underline,
+          {
+            width: "0%",
+            left: "0%",
+          },
+          {
+            width: "100%",
+            duration: 0.5,
+          }
+        );
+
+        tl.add("midway");
+
+        tl.fromTo(
+          underline,
+          {
+            width: "100%",
+            left: "0%",
+          },
+          {
+            width: "0%",
+            left: "100%",
+            duration: 0.5,
+            immediateRender: false,
+          }
+        );
+      }
+
+      // Mouseenter
+      link.addEventListener("mouseenter", () => {
+        console.log("enter");
+
+        (link as any).tl.tweenFromTo(0, "midway");
+      });
+
+      // Mouseleave
+      link.addEventListener("mouseleave", () => {
+        (link as any).tl.play();
+      });
+    });
+  }, []);
+
   return (
     <header
       ref={navRef}
       className="flex text-slate-50 border-b border-b-gray-border px-6 py-6 items-center sticky"
     >
-      <div className="text-2xl font-brand flex-1 lg:flex-none">krish</div>
+      <div
+        className="text-2xl font-brand flex-1 lg:flex-none cursor-pointer"
+        onMouseEnter={animateName}
+        onMouseLeave={revertName}
+      >
+        krish{" "}
+        <span ref={nameRef} className="hidden md:inline opacity-0 absolute">
+          agarwal
+        </span>
+      </div>
 
       <div className="flex-1 hidden lg:block">
         <nav className="flex justify-center gap-4 font-spline-mono uppercase">
-          <a href="#home">Home</a>
-          <a href="#works">Works</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="#home" className="nav-links">
+            Home
+            <span className="nav-underline"></span>
+          </a>
+          <a href="#works" className="nav-links">
+            Works
+            <span className="nav-underline"></span>
+          </a>
+          <a href="#about" className="nav-links">
+            About
+            <span className="nav-underline"></span>
+          </a>
+          <a href="#contact" className="nav-links">
+            Contact
+            <span className="nav-underline"></span>
+          </a>
         </nav>
       </div>
 
