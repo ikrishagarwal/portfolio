@@ -14,7 +14,7 @@ export function Footer() {
             Links
           </h3>
           <div className="font-spline-mono text-amber-50">
-            <a href="#hero" className="block mb-2 hover:underline">
+            <a href="#home" className="block mb-2 hover:underline">
               Home
             </a>
             <a href="#works" className="block mb-2 hover:underline">

@@ -51,7 +51,7 @@ export function NavBar() {
 
       <div className="flex-1 hidden lg:block">
         <nav className="flex justify-center gap-4 font-spline-mono uppercase">
-          <a href="#hero">Home</a>
+          <a href="#home">Home</a>
           <a href="#works">Works</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>

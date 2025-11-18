@@ -7,7 +7,7 @@ import { Footer } from "@/sections/Footer";
 
 function App() {
   return (
-    <section className="min-h-screen w-full bg-background">
+    <section id="home" className="min-h-screen w-full bg-background">
       <NavBar />
       <section className="flex h-auto">
         <section className="hidden lg:block w-1/12"></section>
