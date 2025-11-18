@@ -63,11 +63,11 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 flex"
+      className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 flex flex-col lg:flex-row"
     >
       <h1
         ref={headingRef}
-        className="text-8xl font-bold mb-4 font-brand text-center flex-4"
+        className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 font-brand text-center flex-4"
       >
         How about we work on something together?
       </h1>
@@ -78,16 +78,18 @@ export function Contact() {
             opportunities to be part of your visions. Feel free to reach out to
             me via email.
           </p>
-          <a href="mailto:foronlykrish@gmail.com">
-            <button className="cursor-pointer w-full mt-3 px-6 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
-              Get in Touch
-            </button>
-          </a>
-          <a href="#">
-            <button className="cursor-pointer w-full mt-3 px-15 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
-              Resume
-            </button>
-          </a>
+          <div className="flex flex-row lg:flex-col">
+            <a href="mailto:foronlykrish@gmail.com" className="mr-3 lg:mr-0">
+              <button className="cursor-pointer w-full mt-3 px-4 lg:px-6 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
+                Get in Touch
+              </button>
+            </a>
+            <a href="#">
+              <button className="cursor-pointer w-full mt-3 px-6 lg:px-15 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
+                Resume
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </section>

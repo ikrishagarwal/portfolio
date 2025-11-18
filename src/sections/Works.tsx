@@ -113,9 +113,11 @@ export function Works() {
     >
       <h2
         ref={headingRef}
-        className="text-8xl font-bold font-brand text-center"
+        className="text-5xl md:text-8xl font-bold font-brand text-center"
       >
-        Notable Works
+        Notable
+        <br className="block md:hidden" />
+        Works
       </h2>
       <section className="py-20 overflow-x-hidden">
         {workCards.map((work, index) => (

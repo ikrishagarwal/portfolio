@@ -69,11 +69,11 @@ export function About() {
     >
       <h1
         ref={headingRef}
-        className="text-8xl font-bold mb-4 font-brand text-center"
+        className="text-5xl md:text-8xl font-bold mb-4 font-brand text-center"
       >
         About Me
       </h1>
-      <div className="max-w-4xl mx-auto mt-20 text-justify text-2xl leading-relaxed font-spline-mono font-regular">
+      <div className="max-w-4xl mx-auto mt-20 text-justify text-sm md:text-xl lg:text-2xl leading-relaxed font-spline-mono font-regular">
         <p className="mb-6 about-text">
           Hello! I'm Krish, a passionate developer with a love for creating
           beautiful and functional web applications. With a strong background in

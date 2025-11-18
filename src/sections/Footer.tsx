@@ -1,9 +1,11 @@
 export function Footer() {
   return (
-    <footer className="mx-20 px-15 pt-10 border border-gray-border rounded-t-3xl">
+    <footer className="mx-0 lg:mx-20 px-15 pt-10 border border-gray-border rounded-0 lg:rounded-t-3xl">
       <div className="font-brand text-amber-50 text-lg border-b border-dashed border-gray-500">
         <span>krish agarwal</span>
-        <span className="float-right">let's build something together</span>
+        <span className="float-right hidden md:block">
+          let's build something together
+        </span>
       </div>
       {/* Make 3 sections, links, socials, connect */}
       <div className="flex flex-col md:flex-row justify-between py-8 gap-6">

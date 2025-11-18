@@ -12,10 +12,19 @@ export function WorkCard({
       target="_blank"
       className="block rounded-xl overflow-hidden mb-8 py-8 bg-zinc-950"
     >
-      <div className="flex flex-row">
+      <div className="flex flex-col md:flex-row">
         {index % 2 === 1 ? (
-          <img src={src} alt={title} className="w-full md:w-1/2" />
+          <img
+            src={src}
+            alt={title}
+            className="w-full md:w-1/2 hidden md:block"
+          />
         ) : null}
+        <img
+          src={src}
+          alt={title}
+          className="w-full md:w-1/2 block md:hidden"
+        />
         <div className="p-4 flex-1 flex flex-col">
           <div className="flex-1">
             <h3 className="text-4xl font-semibold font-brand">{title}</h3>
@@ -33,7 +42,11 @@ export function WorkCard({
           </div>
         </div>
         {index % 2 === 0 ? (
-          <img src={src} alt={title} className="w-full md:w-1/2" />
+          <img
+            src={src}
+            alt={title}
+            className="w-full md:w-1/2 hidden md:block"
+          />
         ) : null}
       </div>
     </a>
