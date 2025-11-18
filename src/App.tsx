@@ -10,14 +10,14 @@ function App() {
     <section className="min-h-screen w-full bg-background">
       <NavBar />
       <section className="flex h-auto">
-        <section className="hidden md:block w-1/12"></section>
-        <section className="text-amber-50 border-x border-gray-border border-t-0 flex-1">
+        <section className="hidden lg:block w-1/12"></section>
+        <section className="text-amber-50 border-x border-gray-border border-t-0 flex-1 overflow-x-hidden">
           <Hero />
           <Works />
           <About />
           <Contact />
         </section>
-        <section className="hidden md:block w-1/12"></section>
+        <section className="hidden lg:block w-1/12"></section>
       </section>
       <Footer />
     </section>

@@ -120,7 +120,7 @@ export function Hero() {
     >
       <div>
         <p>
-          <span className="text-lg font-spline-mono pr-7">
+          <span className="block lg:inline text-sm md:text-lg font-spline-mono pr-7 mb-2 md:mb-0">
             <span
               ref={introRef}
               className="inline-block text-amber-50 opacity-100"
@@ -142,7 +142,7 @@ export function Hero() {
           <p className="hero-text">& Explorer</p>
           <span
             ref={explorerRef}
-            className="block max-w-md md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right"
+            className="block max-w-md mt-2 md:mt-0 md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right"
           >
             An enthusiastic programmer and explorer, who loves to learn and
             create.

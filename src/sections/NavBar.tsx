@@ -47,14 +47,16 @@ export function NavBar() {
       ref={navRef}
       className="flex text-slate-50 border-b border-b-gray-border px-6 py-6 items-center sticky"
     >
-      <div className="text-2xl font-brand">krish</div>
+      <div className="text-2xl font-brand flex-1 lg:flex-none">krish</div>
 
-      <nav className="flex-1 flex justify-center gap-4 font-spline-mono uppercase">
-        <a href="#hero">Home</a>
-        <a href="#works">Works</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div className="flex-1 hidden lg:block">
+        <nav className="flex justify-center gap-4 font-spline-mono uppercase">
+          <a href="#hero">Home</a>
+          <a href="#works">Works</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
 
       <div className="font-spline-mono text-gray-400">
         <Time />

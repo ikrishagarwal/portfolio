@@ -14,7 +14,7 @@ html {
 }
 
 .hero-text {
-  @apply text-4xl md:text-9xl font-bold;
+  @apply text-5xl md:text-9xl font-bold;
   font-family: var(--font-brand);
 }
 
