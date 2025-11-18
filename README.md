@@ -5,7 +5,7 @@ This is my personal portfolio website built with React and GSAP for animations. 
 ## Features
 
 - Animated sections using GSAP
-- ~~Responsive design~~
+- Responsive design
 
 ## Tech Stack
 
