@@ -81,14 +81,17 @@ export function NavBar() {
   useEffect(() => {
     gsap.utils.toArray(".nav-links").forEach((rawLink, i) => {
       const link = rawLink as HTMLElement;
-      const underline = gsap.utils.toArray(".nav-underline")[
-        i
-      ] as HTMLElement | null;
-      console.log(underline);
+
+      const underline = //
+        gsap.utils.toArray(".nav-underline")[i] as HTMLElement | null;
+      const navText = gsap.utils.toArray(".nav-text")[i] as HTMLElement;
+
       const tl = gsap.timeline({ paused: true });
       (link as any).tl = tl;
 
       if (underline) {
+        tl.add("start");
+
         tl.fromTo(
           underline,
           {
@@ -99,6 +102,20 @@ export function NavBar() {
             width: "100%",
             duration: 0.5,
           }
+        );
+
+        tl.to(
+          navText,
+          {
+            scrambleText: {
+              text: navText.textContent || "",
+              chars: "01",
+              // speed: 0.01,
+            },
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "start"
         );
 
         tl.add("midway");
@@ -120,8 +137,6 @@ export function NavBar() {
 
       // Mouseenter
       link.addEventListener("mouseenter", () => {
-        console.log("enter");
-
         (link as any).tl.tweenFromTo(0, "midway");
       });
 
@@ -151,19 +166,19 @@ export function NavBar() {
       <div className="flex-1 hidden lg:block">
         <nav className="flex justify-center gap-4 font-spline-mono uppercase">
           <a href="#home" className="nav-links">
-            Home
+            <span className="nav-text">Home</span>
             <span className="nav-underline"></span>
           </a>
           <a href="#works" className="nav-links">
-            Works
+            <span className="nav-text">Works</span>
             <span className="nav-underline"></span>
           </a>
           <a href="#about" className="nav-links">
-            About
+            <span className="nav-text">About</span>
             <span className="nav-underline"></span>
           </a>
           <a href="#contact" className="nav-links">
-            Contact
+            <span className="nav-text">Contact</span>
             <span className="nav-underline"></span>
           </a>
         </nav>
