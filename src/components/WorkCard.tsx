@@ -10,7 +10,7 @@ export function WorkCard({
     <a
       href={link}
       target="_blank"
-      className="block rounded-xl overflow-hidden mb-8 py-8 bg-zinc-950 work-card"
+      className="block rounded-xl overflow-hidden mb-8 py-8 bg-zinc-950 work-card border-gray-border"
     >
       <div className="flex flex-col md:flex-row">
         {index % 2 === 1 ? (

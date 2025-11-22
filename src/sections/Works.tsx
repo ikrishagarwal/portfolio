@@ -99,6 +99,27 @@ export function Works() {
           },
           "<0.75"
         );
+
+      if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches)
+        return;
+
+      (card as HTMLElement).addEventListener("mouseenter", () => {
+        gsap.to(card as HTMLElement, {
+          scale: 0.97,
+          borderWidth: "1px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      (card as HTMLElement).addEventListener("mouseleave", () => {
+        gsap.to(card as HTMLElement, {
+          scale: 1,
+          borderWidth: "0px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
     });
 
     return () => {
@@ -121,17 +142,15 @@ export function Works() {
       </h2>
       <section className="py-20 overflow-x-hidden">
         {workCards.map((work, index) => (
-          <div className="work-card" key={index}>
-            <WorkCard
-              key={work.title}
-              src={work.src}
-              link={work.link}
-              title={work.title}
-              description={work.description}
-              tags={work.tags}
-              index={index}
-            />
-          </div>
+          <WorkCard
+            key={work.title}
+            src={work.src}
+            link={work.link}
+            title={work.title}
+            description={work.description}
+            tags={work.tags}
+            index={index}
+          />
         ))}
       </section>
     </section>
