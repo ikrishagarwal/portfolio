@@ -4,6 +4,7 @@ import { Works } from "@/sections/Works";
 import { About } from "@/sections/About";
 import { Contact } from "@/sections/Contact";
 import { Footer } from "@/sections/Footer";
+import { CursorFollower } from "@/components/CursorFollower";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <section className="hidden lg:block w-1/12"></section>
       </section>
       <Footer />
+      <CursorFollower />
     </section>
   );
 }
