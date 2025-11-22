@@ -5,6 +5,7 @@ export function WorkCard({
   description,
   tags,
   index,
+  isPrivate,
 }: WorkCardProps) {
   return (
     <a
@@ -39,6 +40,14 @@ export function WorkCard({
                 {tag}
               </span>
             ))}
+            {isPrivate ? (
+              <span
+                key="private"
+                className="bg-gray-border border border-gray-400 text-gray-300 text-sm font-spline-mono px-2 py-1 rounded lowercase"
+              >
+                Private Project
+              </span>
+            ) : null}
           </div>
         </div>
         {index % 2 === 0 ? (
@@ -60,4 +69,5 @@ export interface WorkCardProps {
   description: string;
   tags: string[];
   index: number;
+  isPrivate?: boolean | null;
 }

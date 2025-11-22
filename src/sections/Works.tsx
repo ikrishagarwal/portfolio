@@ -10,6 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 export function Works() {
   const workCards = [
     {
+      src: "/images/krix.png",
+      link: "https://krix.now.sh",
+      title: "Krix - A multipurpose Discord bot",
+      description:
+        "Krix is a versatile Discord bot designed to enhance server management and user engagement. With features ranging from moderation tools to fun commands, Krix is the perfect addition to any Discord community.",
+      tags: ["discord", "bot", "typescript", "nodejs"],
+      private: true,
+    },
+    {
       src: "/images/kwiz.png",
       link: "https://github.com/ikrishagarwal/kwiz",
       title: "Kwiz - A live quiz platform",
@@ -149,6 +158,7 @@ export function Works() {
             title={work.title}
             description={work.description}
             tags={work.tags}
+            isPrivate={work.private}
             index={index}
           />
         ))}
