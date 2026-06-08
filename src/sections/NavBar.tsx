@@ -26,7 +26,7 @@ export function NavBar() {
         borderLeft: "1px solid #444444",
         borderRight: "1px solid #444444",
       },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+      { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
     );
 
     navbarTl.to(navRef.current, {
@@ -53,7 +53,7 @@ export function NavBar() {
     if (nameAnimation) nameAnimation.kill();
 
     nameAnimation = gsap.to(nameRef.current, {
-      opacity: 0.7,
+      opacity: 0.9,
       duration: 1.5,
       ease: "power2.out",
       scrambleText: {
@@ -84,7 +84,9 @@ export function NavBar() {
 
       const underline = //
         gsap.utils.toArray(".nav-underline")[i] as HTMLElement | null;
-      const navText = gsap.utils.toArray(".nav-text")[i] as HTMLElement;
+      const navText = gsap.utils.toArray(".nav-text")[
+        i
+      ] as HTMLElement;
 
       const tl = gsap.timeline({ paused: true });
       (link as any).tl = tl;
@@ -101,7 +103,7 @@ export function NavBar() {
           {
             width: "100%",
             duration: 0.5,
-          }
+          },
         );
 
         tl.to(
@@ -115,7 +117,7 @@ export function NavBar() {
             duration: 0.8,
             ease: "power2.out",
           },
-          "start"
+          "start",
         );
 
         tl.add("midway");
@@ -131,7 +133,7 @@ export function NavBar() {
             left: "100%",
             duration: 0.5,
             immediateRender: false,
-          }
+          },
         );
       }
 
@@ -150,7 +152,7 @@ export function NavBar() {
   return (
     <header
       ref={navRef}
-      className="flex text-slate-50 border-b border-b-gray-border px-6 py-6 items-center sticky"
+      className="flex text-secondary border-b border-b-gray-border px-6 py-6 items-center sticky"
     >
       <div
         className="text-2xl font-brand flex-1 lg:flex-none cursor-pointer"
@@ -158,7 +160,10 @@ export function NavBar() {
         onMouseLeave={revertName}
       >
         krish{" "}
-        <span ref={nameRef} className="hidden md:inline opacity-0 absolute">
+        <span
+          ref={nameRef}
+          className="hidden md:inline opacity-0 absolute text-accent"
+        >
           agarwal
         </span>
       </div>

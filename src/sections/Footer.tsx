@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer className="mx-0 lg:mx-20 px-15 pt-10 border border-gray-border rounded-0 lg:rounded-t-3xl">
-      <div className="font-brand text-amber-50 text-lg border-b border-dashed border-gray-500">
+      <div className="font-brand text-secondary text-lg border-b border-dashed border-gray-500">
         <span>krish agarwal</span>
         <span className="float-right hidden md:block">
           let's build something together
@@ -13,7 +13,7 @@ export function Footer() {
           <h3 className="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500">
             Links
           </h3>
-          <div className="font-spline-mono text-amber-50">
+          <div className="font-spline-mono text-secondary">
             <a href="#home" className="block mb-2 hover:underline">
               Home
             </a>
@@ -32,7 +32,7 @@ export function Footer() {
           <h3 className="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500">
             Socials
           </h3>
-          <div className="font-spline-mono text-amber-50">
+          <div className="font-spline-mono text-secondary">
             <a
               href="https://github.com/ikrishagarwal"
               className="block mb-2 hover:underline"
@@ -57,7 +57,7 @@ export function Footer() {
           <h3 className="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500">
             Connect
           </h3>
-          <div className="font-spline-mono text-amber-50">
+          <div className="font-spline-mono text-secondary">
             <a
               href="mailto:foronlykrish@gmail.com"
               className="block mb-2 hover:underline"
@@ -68,7 +68,8 @@ export function Footer() {
         </div>
       </div>
       <div className="text-gray-400 px-8 py-6 text-center font-spline-mono">
-        © {new Date().getFullYear()} Krish Agarwal. All rights reserved.
+        © {new Date().getFullYear()} Krish Agarwal. All rights
+        reserved.
       </div>
     </footer>
   );

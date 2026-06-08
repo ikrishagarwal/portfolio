@@ -56,7 +56,9 @@ export function Works() {
       },
     });
 
-    const split = new SplitText(headingRef.current, { type: "chars" });
+    const split = new SplitText(headingRef.current, {
+      type: "chars",
+    });
     tl.fromTo(
       split.chars,
       {
@@ -69,7 +71,7 @@ export function Works() {
         opacity: 1,
         stagger: 0.05,
         ease: "back.out",
-      }
+      },
     );
 
     // Animating the cards
@@ -97,7 +99,7 @@ export function Works() {
             opacity: 1,
             stagger: 0.5,
             ease: "power2.out",
-          }
+          },
         )
         .to(
           card as Element,
@@ -106,10 +108,13 @@ export function Works() {
             stagger: 0.5,
             ease: "back.out(1.7)",
           },
-          "<0.75"
+          "<0.75",
         );
 
-      if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches)
+      if (
+        window.matchMedia &&
+        window.matchMedia("(pointer: coarse)").matches
+      )
         return;
 
       (card as HTMLElement).addEventListener("mouseenter", () => {
@@ -139,7 +144,7 @@ export function Works() {
   return (
     <section
       id="works"
-      className="text-amber-50 px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
+      className="text-secondary px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
     >
       <h2
         ref={headingRef}

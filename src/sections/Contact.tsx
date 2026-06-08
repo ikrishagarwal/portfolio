@@ -20,7 +20,9 @@ export function Contact() {
       },
     });
 
-    const split = new SplitText(headingRef.current, { type: "words" });
+    const split = new SplitText(headingRef.current, {
+      type: "words",
+    });
 
     tl.fromTo(
       split.words,
@@ -34,7 +36,7 @@ export function Contact() {
         duration: 1.5,
         ease: "power2.out",
         stagger: 0.25,
-      }
+      },
     );
 
     tl.fromTo(
@@ -52,7 +54,7 @@ export function Contact() {
         },
         ease: "power2.out",
       },
-      "<.5"
+      "<.5",
     );
 
     return () => {
@@ -63,7 +65,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen w-full bg-background text-amber-50 px-8 py-20 flex flex-col lg:flex-row"
+      className="min-h-screen w-full bg-background text-secondary px-8 py-20 flex flex-col lg:flex-row"
     >
       <h1
         ref={headingRef}
@@ -74,12 +76,15 @@ export function Contact() {
       <div className="max-w-4xl mx-auto mt-20 text-justify text-xl leading-relaxed font-spline-mono font-regular flex-2">
         <div className="flex flex-col items-center">
           <p ref={descRef} className="mb-6 px-4">
-            I'm always open to discussing new projects, creative ideas, or
-            opportunities to be part of your visions. Feel free to reach out to
-            me via email.
+            I'm always open to discussing new projects, creative
+            ideas, or opportunities to be part of your visions. Feel
+            free to reach out to me via email.
           </p>
           <div className="flex flex-row lg:flex-col">
-            <a href="mailto:foronlykrish@gmail.com" className="mr-3 lg:mr-0">
+            <a
+              href="mailto:foronlykrish@gmail.com"
+              className="mr-3 lg:mr-0"
+            >
               <button className="cursor-pointer w-full mt-3 px-4 lg:px-6 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
                 Get in Touch
               </button>

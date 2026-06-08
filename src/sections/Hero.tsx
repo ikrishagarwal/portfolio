@@ -36,7 +36,7 @@ export function Hero() {
           speed: 0.3,
         },
         ease: "power2.out",
-      }
+      },
     );
 
     // Animating "Krish"
@@ -52,7 +52,7 @@ export function Hero() {
         opacity: 1,
         ease: "power2.out",
       },
-      "-=0.5"
+      "-=0.5",
     );
 
     // Animating the dot
@@ -66,7 +66,7 @@ export function Hero() {
         opacity: 1,
         ease: "power2.out",
       },
-      "-=0.3"
+      "-=0.3",
     );
 
     // Animating the hero text characters
@@ -84,7 +84,7 @@ export function Hero() {
         duration: 2,
         ease: "power2.out",
         stagger: 0.25,
-      }
+      },
     );
 
     // Animating the explorer description
@@ -105,7 +105,7 @@ export function Hero() {
         },
         ease: "power2.out",
       },
-      "-=1.75"
+      "-=1.75",
     );
 
     return () => {
@@ -116,20 +116,17 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="flex flex-col items-center justify-center text-amber-50 text-center px-6 py-20 gap-6 border-b border-b-gray-border"
+      className="flex flex-col items-center justify-center text-center px-6 py-20 gap-6 border-b border-b-gray-border"
     >
       <div>
         <p>
           <span className="block lg:inline text-sm md:text-lg font-spline-mono pr-7 mb-2 md:mb-0">
-            <span
-              ref={introRef}
-              className="inline-block text-amber-50 opacity-100"
-            >
+            <span ref={introRef} className="inline-block opacity-100">
               0101101
             </span>{" "}
             <span
               ref={nameRef}
-              className="inline-block bg-amber-200 text-background px-2 py-1 font-bold rounded-xs"
+              className="inline-block bg-accent text-background px-2 py-1 font-bold rounded-xs"
             >
               Krish
             </span>
@@ -144,8 +141,8 @@ export function Hero() {
             ref={explorerRef}
             className="block max-w-md mt-2 md:mt-0 md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right"
           >
-            An enthusiastic programmer and explorer, who loves to learn and
-            create.
+            An enthusiastic programmer and explorer, who loves to
+            learn and create.
           </span>
         </div>
       </div>

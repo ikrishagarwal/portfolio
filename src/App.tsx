@@ -25,11 +25,15 @@ function App() {
   return (
     <section id="home" className="min-h-screen w-full bg-background">
       <CursorFollower />
-      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+      <ReactLenis
+        root
+        options={{ autoRaf: false, duration: 2 }}
+        ref={lenisRef}
+      />
       <NavBar />
       <section className="flex h-auto">
         <section className="hidden lg:block w-1/12"></section>
-        <section className="text-amber-50 border-x border-gray-border border-t-0 flex-1 overflow-x-hidden">
+        <section className="text-secondary border-x border-gray-border border-t-0 flex-1 overflow-x-hidden">
           <Hero />
           <Works />
           <About />
