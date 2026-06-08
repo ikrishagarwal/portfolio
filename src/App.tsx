@@ -27,7 +27,12 @@ function App() {
       <CursorFollower />
       <ReactLenis
         root
-        options={{ autoRaf: false, duration: 2 }}
+        options={{
+          autoRaf: false,
+          wheelMultiplier: 0.5,
+          lerp: 0.05,
+          // duration: 1.2,
+        }}
         ref={lenisRef}
       />
       <NavBar />
