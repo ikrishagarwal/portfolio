@@ -5,10 +5,16 @@ export function CursorFollower() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
   const bounceRef = useRef<gsap.core.Tween | null>(null);
+  const enterTimeoutRef = useRef<number | null>(null);
+  const leaveTimeoutRef = useRef<number | null>(null);
+  const lastMouseXRef = useRef(0);
+  const lastMouseYRef = useRef(0);
+  const isHoveringCardRef = useRef(false);
 
-  // contants
+  // constants
   const defaultSize = 38;
-  const expandedSize = defaultSize * 5;
+  // const expandedSize = defaultSize * 5;
+  const debounceMs = 80;
 
   useEffect(() => {
     const el = rootRef.current;
@@ -33,12 +39,18 @@ export function CursorFollower() {
       opacity: 0.8,
     });
 
+    const innerDefaultScale = 4;
+
     gsap.set(inner, {
       width: "100%",
       height: "100%",
+      scale: innerDefaultScale,
+      transformOrigin: "center center",
     });
 
     const onMove = (e: MouseEvent) => {
+      lastMouseXRef.current = e.clientX;
+      lastMouseYRef.current = e.clientY;
       gsap.to(el, {
         x: e.clientX,
         y: e.clientY,
@@ -57,54 +69,86 @@ export function CursorFollower() {
       ease: "sine.inOut",
     });
 
-    // work-card hover behavior
+    // work-card hover behavior - per-card listeners
     const cards = Array.from(
       document.querySelectorAll(".work-card"),
     ) as HTMLElement[];
 
-    const enterCard = () => {
-      gsap.killTweensOf(el);
-      gsap.to(el, {
-        width: expandedSize,
-        height: expandedSize,
-        backgroundColor: "var(--color-accent)",
-        duration: 0.5,
-        ease: "power2.out",
-      });
-      gsap.to(inner, { opacity: 0.8, duration: 0.15 });
-      if (bounceRef.current) bounceRef.current.pause();
-      gsap.fromTo(
-        el,
-        { scale: 0.92 },
-        { scale: 1.04, duration: 0.45, ease: "elastic.out(1, 0.45)" },
-      );
+    const enterCard = (card: HTMLElement) => {
+      isHoveringCardRef.current = true;
+      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = window.setTimeout(() => {
+        if (!isHoveringCardRef.current) return;
+        gsap.killTweensOf(el, { x: true, y: true });
+        gsap.to(el, {
+          scale: 5,
+          duration: 0.6,
+          ease: "back.inOut(1.7)",
+        });
+        gsap.to(inner, {
+          scale: 2,
+          opacity: 0.8,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+        if (bounceRef.current) bounceRef.current.pause();
+        gsap.to(card, {
+          scale: 0.97,
+          borderWidth: "1px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }, debounceMs);
     };
 
-    const leaveCard = () => {
-      gsap.to(inner, { opacity: 0, duration: 0.15 });
-      gsap.to(el, {
-        width: defaultSize,
-        height: defaultSize,
-        backgroundColor: "var(--color-accent)",
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => {
-          if (bounceRef.current) bounceRef.current.resume();
-        },
-      });
+    const leaveCard = (card: HTMLElement) => {
+      isHoveringCardRef.current = false;
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = window.setTimeout(() => {
+        if (isHoveringCardRef.current) return;
+        gsap.to(inner, {
+          scale: innerDefaultScale,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(el, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            if (bounceRef.current) bounceRef.current.resume();
+            gsap.to(el, {
+              x: lastMouseXRef.current,
+              y: lastMouseYRef.current,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+        });
+        gsap.to(card, {
+          scale: 1,
+          borderWidth: "0px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }, debounceMs);
     };
 
     cards.forEach((c) => {
-      c.addEventListener("mouseenter", enterCard);
-      c.addEventListener("mouseleave", leaveCard);
+      c.addEventListener("mouseenter", () => enterCard(c));
+      c.addEventListener("mouseleave", () => leaveCard(c));
     });
 
     return () => {
       document.removeEventListener("mousemove", onMove);
       cards.forEach((c) => {
-        c.removeEventListener("mouseenter", enterCard);
-        c.removeEventListener("mouseleave", leaveCard);
+        c.removeEventListener("mouseenter", () => enterCard(c));
+        c.removeEventListener("mouseleave", () => leaveCard(c));
       });
+      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
       if (bounceRef.current) bounceRef.current.kill();
     };
   }, []);
@@ -112,12 +156,12 @@ export function CursorFollower() {
   return (
     <div
       ref={rootRef}
-      className="hidden md:block rounded-full z-9999 pointer-events-none fixed translate-x-[-50%] translate-y-[-50%]"
+      className="hidden md:block rounded-full z-9999 pointer-events-none fixed  translate-x-[-50%] translate-y-[-50%]"
       aria-hidden="true"
     >
       <div
         ref={innerRef}
-        className="flex justify-center items-center pointer-events-none opacity-0 -rotate-45 scale-[1000%]"
+        className="flex justify-center items-center pointer-events-none opacity-0 -rotate-45"
       >
         <svg
           width="14"

@@ -116,24 +116,6 @@ export function Works() {
         window.matchMedia("(pointer: coarse)").matches
       )
         return;
-
-      (card as HTMLElement).addEventListener("mouseenter", () => {
-        gsap.to(card as HTMLElement, {
-          scale: 0.97,
-          borderWidth: "1px",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      (card as HTMLElement).addEventListener("mouseleave", () => {
-        gsap.to(card as HTMLElement, {
-          scale: 1,
-          borderWidth: "0px",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
     });
 
     return () => {
