@@ -10,11 +10,16 @@ export function CursorFollower() {
   const lastMouseXRef = useRef(0);
   const lastMouseYRef = useRef(0);
   const isHoveringCardRef = useRef(false);
+  const isVanishingRef = useRef(false);
+  const vanishElementsRef = useRef<HTMLElement[]>([]);
+  const isFirstMoveRef = useRef(true);
 
   // constants
   const defaultSize = 38;
   // const expandedSize = defaultSize * 5;
   const debounceMs = 80;
+  const vanishDuration = 0.3;
+  const vanishEase = "power2.out";
 
   useEffect(() => {
     const el = rootRef.current;
@@ -31,12 +36,12 @@ export function CursorFollower() {
     }
 
     gsap.set(el, {
-      top: 0,
-      left: 0,
+      x: -100,
+      y: -100,
       width: defaultSize,
       height: defaultSize,
       backgroundColor: "var(--color-accent)",
-      opacity: 0.8,
+      opacity: 0,
     });
 
     const innerDefaultScale = 4;
@@ -51,11 +56,25 @@ export function CursorFollower() {
     const onMove = (e: MouseEvent) => {
       lastMouseXRef.current = e.clientX;
       lastMouseYRef.current = e.clientY;
+
+      if (isFirstMoveRef.current) {
+        isFirstMoveRef.current = false;
+        gsap.to(el, {
+          x: e.clientX,
+          y: e.clientY,
+          opacity: 0.8,
+          duration: 1.5,
+          ease: "expo.out",
+          overwrite: "auto",
+        });
+        return;
+      }
+
       gsap.to(el, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.85,
-        ease: "power3.out",
+        duration: 1.5,
+        ease: "expo.out",
         overwrite: "auto",
       });
     };
@@ -74,9 +93,16 @@ export function CursorFollower() {
       document.querySelectorAll(".work-card"),
     ) as HTMLElement[];
 
+    // cursor-vanish elements
+    vanishElementsRef.current = Array.from(
+      document.querySelectorAll(".cursor-vanish"),
+    ) as HTMLElement[];
+
     const enterCard = (card: HTMLElement) => {
+      if (isVanishingRef.current) return;
       isHoveringCardRef.current = true;
-      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      if (enterTimeoutRef.current)
+        clearTimeout(enterTimeoutRef.current);
       enterTimeoutRef.current = window.setTimeout(() => {
         if (!isHoveringCardRef.current) return;
         gsap.killTweensOf(el, { x: true, y: true });
@@ -103,7 +129,8 @@ export function CursorFollower() {
 
     const leaveCard = (card: HTMLElement) => {
       isHoveringCardRef.current = false;
-      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+      if (leaveTimeoutRef.current)
+        clearTimeout(leaveTimeoutRef.current);
       leaveTimeoutRef.current = window.setTimeout(() => {
         if (isHoveringCardRef.current) return;
         gsap.to(inner, {
@@ -136,6 +163,60 @@ export function CursorFollower() {
       }, debounceMs);
     };
 
+    const enterVanish = () => {
+      if (isHoveringCardRef.current) return;
+      isVanishingRef.current = true;
+      gsap.killTweensOf(el, { scale: true, opacity: true });
+      gsap.to(el, {
+        scale: 0,
+        opacity: 0,
+        duration: vanishDuration,
+        ease: vanishEase,
+        overwrite: "auto",
+      });
+      gsap.to(inner, {
+        scale: 0,
+        opacity: 0,
+        duration: vanishDuration,
+        ease: vanishEase,
+        overwrite: "auto",
+      });
+      if (bounceRef.current) bounceRef.current.pause();
+    };
+
+    const leaveVanish = () => {
+      isVanishingRef.current = false;
+      gsap.to(el, {
+        scale: 1,
+        opacity: 0.8,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto",
+        onComplete: () => {
+          if (bounceRef.current) bounceRef.current.resume();
+          gsap.to(el, {
+            x: lastMouseXRef.current,
+            y: lastMouseYRef.current,
+            duration: 0.3,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+        },
+      });
+      gsap.to(inner, {
+        scale: innerDefaultScale,
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    };
+
+    vanishElementsRef.current.forEach((v) => {
+      v.addEventListener("mouseenter", enterVanish);
+      v.addEventListener("mouseleave", leaveVanish);
+    });
+
     cards.forEach((c) => {
       c.addEventListener("mouseenter", () => enterCard(c));
       c.addEventListener("mouseleave", () => leaveCard(c));
@@ -147,8 +228,14 @@ export function CursorFollower() {
         c.removeEventListener("mouseenter", () => enterCard(c));
         c.removeEventListener("mouseleave", () => leaveCard(c));
       });
-      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
-      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+      vanishElementsRef.current.forEach((v) => {
+        v.removeEventListener("mouseenter", enterVanish);
+        v.removeEventListener("mouseleave", leaveVanish);
+      });
+      if (enterTimeoutRef.current)
+        clearTimeout(enterTimeoutRef.current);
+      if (leaveTimeoutRef.current)
+        clearTimeout(leaveTimeoutRef.current);
       if (bounceRef.current) bounceRef.current.kill();
     };
   }, []);

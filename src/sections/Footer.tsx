@@ -14,16 +14,16 @@ export function Footer() {
             Links
           </h3>
           <div className="font-spline-mono text-secondary">
-            <a href="#home" className="block mb-2 hover:underline">
+            <a href="#home" className="block mb-2 hover:underline cursor-vanish">
               Home
             </a>
-            <a href="#works" className="block mb-2 hover:underline">
+            <a href="#works" className="block mb-2 hover:underline cursor-vanish">
               Works
             </a>
-            <a href="#about" className="block mb-2 hover:underline">
+            <a href="#about" className="block mb-2 hover:underline cursor-vanish">
               About
             </a>
-            <a href="#contact" className="block mb-2 hover:underline">
+            <a href="#contact" className="block mb-2 hover:underline cursor-vanish">
               Contact
             </a>
           </div>
@@ -35,19 +35,19 @@ export function Footer() {
           <div className="font-spline-mono text-secondary">
             <a
               href="https://github.com/ikrishagarwal"
-              className="block mb-2 hover:underline"
+              className="block mb-2 hover:underline cursor-vanish"
             >
               Github
             </a>
             <a
               href="https://www.linkedin.com/in/ikrishagarwal"
-              className="block mb-2 hover:underline"
+              className="block mb-2 hover:underline cursor-vanish"
             >
               LinkedIn
             </a>
             <a
               href="https://www.instagram.com/coffee.to.code.machine"
-              className="block mb-2 hover:underline"
+              className="block mb-2 hover:underline cursor-vanish"
             >
               Instagram
             </a>
@@ -60,7 +60,7 @@ export function Footer() {
           <div className="font-spline-mono text-secondary">
             <a
               href="mailto:foronlykrish@gmail.com"
-              className="block mb-2 hover:underline"
+              className="block mb-2 hover:underline cursor-vanish"
             >
               Mail
             </a>

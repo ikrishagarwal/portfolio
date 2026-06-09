@@ -83,13 +83,13 @@ export function Contact() {
           <div className="flex flex-row lg:flex-col">
             <a
               href="mailto:foronlykrish@gmail.com"
-              className="mr-3 lg:mr-0"
+              className="mr-3 lg:mr-0 cursor-vanish"
             >
               <button className="cursor-pointer w-full mt-3 px-4 lg:px-6 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
                 Get in Touch
               </button>
             </a>
-            <a href="#">
+            <a href="#" className="cursor-vanish">
               <button className="cursor-pointer w-full mt-3 px-6 lg:px-15 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors">
                 Resume
               </button>

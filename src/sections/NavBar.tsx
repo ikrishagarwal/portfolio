@@ -155,7 +155,7 @@ export function NavBar() {
       className="flex text-secondary border-b border-b-gray-border px-6 py-6 items-center sticky"
     >
       <div
-        className="text-2xl font-brand flex-1 lg:flex-none cursor-pointer"
+        className="text-xl flex-1 lg:flex-none cursor-pointer cursor-vanish font-spline-mono"
         onMouseEnter={animateName}
         onMouseLeave={revertName}
       >
@@ -170,19 +170,19 @@ export function NavBar() {
 
       <div className="flex-1 hidden lg:block">
         <nav className="flex justify-center gap-4 font-spline-mono uppercase">
-          <a href="#home" className="nav-links">
+          <a href="#home" className="nav-links cursor-vanish">
             <span className="nav-text">Home</span>
             <span className="nav-underline"></span>
           </a>
-          <a href="#works" className="nav-links">
+          <a href="#works" className="nav-links cursor-vanish">
             <span className="nav-text">Works</span>
             <span className="nav-underline"></span>
           </a>
-          <a href="#about" className="nav-links">
+          <a href="#about" className="nav-links cursor-vanish">
             <span className="nav-text">About</span>
             <span className="nav-underline"></span>
           </a>
-          <a href="#contact" className="nav-links">
+          <a href="#contact" className="nav-links cursor-vanish">
             <span className="nav-text">Contact</span>
             <span className="nav-underline"></span>
           </a>
