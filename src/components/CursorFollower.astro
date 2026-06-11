@@ -62,14 +62,23 @@
       transformOrigin: "center center",
     });
 
+    type CursorState =
+      | { status: "idle" }
+      | { status: "entering"; card: Element; timeout: ReturnType<typeof setTimeout> }
+      | { status: "hovering"; card: Element }
+      | { status: "leaving"; card: Element; timeout: ReturnType<typeof setTimeout> }
+      | { status: "vanishing" }
+      | { status: "hidden" };
+
+    let state: CursorState = { status: "idle" };
     let lastMouseX = 0;
     let lastMouseY = 0;
-    let isHoveringCard = false;
-    let isVanishing = false;
     let isFirstMove = true;
     let bounceTween = null;
-    let enterTimeout: NodeJS.Timeout | null = null;
-    let leaveTimeout: NodeJS.Timeout | null = null;
+
+    function transitionTo(newState: CursorState) {
+      state = newState;
+    }
 
     const onMove = (e: MouseEvent) => {
       lastMouseX = e.clientX;
@@ -115,71 +124,106 @@
     );
 
     const enterCard = (card: Element) => {
-      if (isVanishing) return;
-      isHoveringCard = true;
-      if (enterTimeout) clearTimeout(enterTimeout);
-      enterTimeout = setTimeout(() => {
-        if (!isHoveringCard) return;
-        gsap.killTweensOf(root, { x: true, y: true });
-        gsap.to(root, {
-          scale: 5,
-          duration: 0.6,
-          ease: "back.inOut(1.7)",
-        });
-        gsap.to(inner, {
-          scale: 2,
-          opacity: 0.8,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-        if (bounceTween) bounceTween.pause();
-        gsap.to(card, {
-          scale: 0.97,
-          borderWidth: "1px",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }, debounceMs);
+      if (state.status === "vanishing" || state.status === "hidden") return;
+
+      if (state.status === "entering") {
+        clearTimeout(state.timeout);
+      }
+
+      if (state.status === "leaving") {
+        clearTimeout(state.timeout);
+        if (state.card === card) {
+          transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
+          return;
+        }
+      }
+
+      if (state.status === "hovering") {
+        if (state.card === card) return;
+        transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
+        return;
+      }
+
+      transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
     };
+
+    function enterCardTimeout(card: Element) {
+      if (state.status !== "entering" || state.card !== card) return;
+
+      gsap.killTweensOf(root, { x: true, y: true });
+      gsap.to(root, {
+        scale: 5,
+        duration: 0.6,
+        ease: "back.inOut(1.7)",
+      });
+      gsap.to(inner, {
+        scale: 2,
+        opacity: 0.8,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      if (bounceTween) bounceTween.pause();
+      gsap.to(card, {
+        scale: 0.97,
+        borderWidth: "1px",
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      transitionTo({ status: "hovering", card });
+    }
 
     const leaveCard = (card: Element) => {
-      isHoveringCard = false;
-      if (leaveTimeout) clearTimeout(leaveTimeout);
-      leaveTimeout = setTimeout(() => {
-        if (isHoveringCard) return;
-        gsap.to(inner, {
-          scale: innerDefaultScale,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
+      if (state.status !== "hovering" || state.card !== card) return;
 
-        gsap.to(root, {
-          scale: 1,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            if (bounceTween) bounceTween.resume();
-            gsap.to(root, {
-              x: lastMouseX,
-              y: lastMouseY,
-              duration: 0.3,
-              ease: "power3.out",
-            });
-          },
-        });
-        gsap.to(card, {
-          scale: 1,
-          borderWidth: "0px",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }, debounceMs);
+      const timeout = setTimeout(() => leaveCardTimeout(card), debounceMs);
+      transitionTo({ status: "leaving", card, timeout });
     };
 
+    function leaveCardTimeout(card: Element) {
+      if (state.status !== "leaving" || state.card !== card) return;
+
+      gsap.to(inner, {
+        scale: innerDefaultScale,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+
+      gsap.to(root, {
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: () => {
+          if (bounceTween) bounceTween.resume();
+          gsap.to(root, {
+            x: lastMouseX,
+            y: lastMouseY,
+            duration: 0.3,
+            ease: "power3.out",
+          });
+        },
+      });
+      gsap.to(card, {
+        scale: 1,
+        borderWidth: "0px",
+        duration: 0.3,
+        ease: "power2.out",
+        onComplete: () => {
+          if (state.status === "leaving" && state.card === card) {
+            transitionTo({ status: "idle" });
+          }
+        },
+      });
+    }
+
     const enterVanish = () => {
-      if (isHoveringCard) return;
-      isVanishing = true;
+      if (state.status === "hovering" || state.status === "entering" || state.status === "leaving") return;
+
+      if (state.status === "vanishing" || state.status === "hidden") return;
+
+      transitionTo({ status: "vanishing" });
+
       gsap.killTweensOf(root, { scale: true, opacity: true });
       gsap.to(root, {
         scale: 0,
@@ -199,7 +243,10 @@
     };
 
     const leaveVanish = () => {
-      isVanishing = false;
+      if (state.status !== "vanishing") return;
+
+      transitionTo({ status: "idle" });
+
       gsap.to(root, {
         scale: 1,
         opacity: 0.8,
@@ -226,29 +273,32 @@
       });
     };
 
+    const handleCardEnter = (c: Element) => () => enterCard(c);
+    const handleCardLeave = (c: Element) => () => leaveCard(c);
+
     vanishElements.forEach((v) => {
       v.addEventListener("mouseenter", enterVanish);
       v.addEventListener("mouseleave", leaveVanish);
     });
 
     cards.forEach((c) => {
-      c.addEventListener("mouseenter", () => enterCard(c));
-      c.addEventListener("mouseleave", () => leaveCard(c));
+      c.addEventListener("mouseenter", handleCardEnter(c));
+      c.addEventListener("mouseleave", handleCardLeave(c));
     });
 
     // Cleanup on page unload
     window.addEventListener("beforeunload", () => {
       document.removeEventListener("mousemove", onMove);
       cards.forEach((c) => {
-        c.removeEventListener("mouseenter", () => enterCard(c));
-        c.removeEventListener("mouseleave", () => leaveCard(c));
+        c.removeEventListener("mouseenter", handleCardEnter(c));
+        c.removeEventListener("mouseleave", handleCardLeave(c));
       });
       vanishElements.forEach((v) => {
         v.removeEventListener("mouseenter", enterVanish);
         v.removeEventListener("mouseleave", leaveVanish);
       });
-      if (enterTimeout) clearTimeout(enterTimeout);
-      if (leaveTimeout) clearTimeout(leaveTimeout);
+      if (state.status === "entering") clearTimeout(state.timeout);
+      if (state.status === "leaving") clearTimeout(state.timeout);
       if (bounceTween) bounceTween.kill();
     });
   })();

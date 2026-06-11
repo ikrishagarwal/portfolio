@@ -31,14 +31,14 @@ if (!images[src])
     {
       index % 2 === 1 ? (
         <Image
-          src={import(src)}
+          src={images[src]()}
           alt={title}
           class="w-full md:w-1/2 hidden md:block"
         />
       ) : null
     }
     <Image
-      src={import(src)}
+      src={images[src]()}
       alt={title}
       class="w-full md:w-1/2 block md:hidden"
     />
@@ -68,8 +68,8 @@ if (!images[src])
     </div>
     {
       index % 2 === 0 ? (
-        <img
-          src={src}
+        <Image
+          src={images[src]()}
           alt={title}
           class="w-full md:w-1/2 hidden md:block"
         />
