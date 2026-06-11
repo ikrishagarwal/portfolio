@@ -150,7 +150,8 @@
     function enterCardTimeout(card: Element) {
       if (state.status !== "entering" || state.card !== card) return;
 
-      gsap.killTweensOf(root, { x: true, y: true });
+      gsap.killTweensOf(root);
+      gsap.killTweensOf(inner);
       gsap.to(root, {
         scale: 5,
         duration: 0.6,
@@ -192,10 +193,10 @@
 
       gsap.to(root, {
         scale: 1,
+        opacity: 0.8,
         duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
-          if (bounceTween) bounceTween.resume();
           gsap.to(root, {
             x: lastMouseX,
             y: lastMouseY,
@@ -212,6 +213,7 @@
         onComplete: () => {
           if (state.status === "leaving" && state.card === card) {
             transitionTo({ status: "idle" });
+            if (bounceTween) bounceTween.resume();
           }
         },
       });
