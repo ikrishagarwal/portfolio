@@ -1,0 +1,255 @@
+<div
+  id="cursor-root"
+  class="hidden md:block rounded-full z-9999 pointer-events-none fixed translate-x-[-50%] translate-y-[-50%]"
+  aria-hidden="true"
+>
+  <div
+    id="cursor-inner"
+    class="flex justify-center items-center pointer-events-none opacity-0 -rotate-45"
+  >
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="text-background"
+    >
+      <path
+        d="M5 12h14M12 5l7 7-7 7"
+        stroke="currentColor"
+        class="stroke-2"
+        stroke-linejoin="round"></path>
+    </svg>
+  </div>
+</div>
+<script>
+  import gsap from "gsap";
+  (() => {
+    const root = document.getElementById("cursor-root");
+    const inner = document.getElementById("cursor-inner");
+    if (!root || !inner) return;
+
+    // hide on touch devices early
+    if (
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      root.style.display = "none";
+      return;
+    }
+
+    const defaultSize = 38;
+    const debounceMs = 80;
+    const vanishDuration = 0.3;
+    const vanishEase = "power2.out";
+
+    gsap.set(root, {
+      x: -100,
+      y: -100,
+      width: defaultSize,
+      height: defaultSize,
+      backgroundColor: "var(--color-accent)",
+      opacity: 0,
+    });
+
+    const innerDefaultScale = 4;
+
+    gsap.set(inner, {
+      width: "100%",
+      height: "100%",
+      scale: innerDefaultScale,
+      transformOrigin: "center center",
+    });
+
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let isHoveringCard = false;
+    let isVanishing = false;
+    let isFirstMove = true;
+    let bounceTween = null;
+    let enterTimeout: NodeJS.Timeout | null = null;
+    let leaveTimeout: NodeJS.Timeout | null = null;
+
+    const onMove = (e: MouseEvent) => {
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+
+      if (isFirstMove) {
+        isFirstMove = false;
+        gsap.to(root, {
+          x: e.clientX,
+          y: e.clientY,
+          opacity: 0.8,
+          duration: 1.5,
+          ease: "expo.out",
+          overwrite: "auto",
+        });
+        return;
+      }
+
+      gsap.to(root, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 1.5,
+        ease: "expo.out",
+        overwrite: "auto",
+      });
+    };
+    document.addEventListener("mousemove", onMove);
+
+    bounceTween = gsap.to(root, {
+      scale: 1.06,
+      duration: 0.9,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut",
+    });
+
+    // work-card hover behavior
+    const cards = Array.from(document.querySelectorAll(".work-card"));
+
+    // cursor-vanish elements
+    const vanishElements = Array.from(
+      document.querySelectorAll(".cursor-vanish"),
+    );
+
+    const enterCard = (card: Element) => {
+      if (isVanishing) return;
+      isHoveringCard = true;
+      if (enterTimeout) clearTimeout(enterTimeout);
+      enterTimeout = setTimeout(() => {
+        if (!isHoveringCard) return;
+        gsap.killTweensOf(root, { x: true, y: true });
+        gsap.to(root, {
+          scale: 5,
+          duration: 0.6,
+          ease: "back.inOut(1.7)",
+        });
+        gsap.to(inner, {
+          scale: 2,
+          opacity: 0.8,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+        if (bounceTween) bounceTween.pause();
+        gsap.to(card, {
+          scale: 0.97,
+          borderWidth: "1px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }, debounceMs);
+    };
+
+    const leaveCard = (card: Element) => {
+      isHoveringCard = false;
+      if (leaveTimeout) clearTimeout(leaveTimeout);
+      leaveTimeout = setTimeout(() => {
+        if (isHoveringCard) return;
+        gsap.to(inner, {
+          scale: innerDefaultScale,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(root, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            if (bounceTween) bounceTween.resume();
+            gsap.to(root, {
+              x: lastMouseX,
+              y: lastMouseY,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+        });
+        gsap.to(card, {
+          scale: 1,
+          borderWidth: "0px",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }, debounceMs);
+    };
+
+    const enterVanish = () => {
+      if (isHoveringCard) return;
+      isVanishing = true;
+      gsap.killTweensOf(root, { scale: true, opacity: true });
+      gsap.to(root, {
+        scale: 0,
+        opacity: 0,
+        duration: vanishDuration,
+        ease: vanishEase,
+        overwrite: "auto",
+      });
+      gsap.to(inner, {
+        scale: 0,
+        opacity: 0,
+        duration: vanishDuration,
+        ease: vanishEase,
+        overwrite: "auto",
+      });
+      if (bounceTween) bounceTween.pause();
+    };
+
+    const leaveVanish = () => {
+      isVanishing = false;
+      gsap.to(root, {
+        scale: 1,
+        opacity: 0.8,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto",
+        onComplete: () => {
+          if (bounceTween) bounceTween.resume();
+          gsap.to(root, {
+            x: lastMouseX,
+            y: lastMouseY,
+            duration: 0.3,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+        },
+      });
+      gsap.to(inner, {
+        scale: innerDefaultScale,
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    };
+
+    vanishElements.forEach((v) => {
+      v.addEventListener("mouseenter", enterVanish);
+      v.addEventListener("mouseleave", leaveVanish);
+    });
+
+    cards.forEach((c) => {
+      c.addEventListener("mouseenter", () => enterCard(c));
+      c.addEventListener("mouseleave", () => leaveCard(c));
+    });
+
+    // Cleanup on page unload
+    window.addEventListener("beforeunload", () => {
+      document.removeEventListener("mousemove", onMove);
+      cards.forEach((c) => {
+        c.removeEventListener("mouseenter", () => enterCard(c));
+        c.removeEventListener("mouseleave", () => leaveCard(c));
+      });
+      vanishElements.forEach((v) => {
+        v.removeEventListener("mouseenter", enterVanish);
+        v.removeEventListener("mouseleave", leaveVanish);
+      });
+      if (enterTimeout) clearTimeout(enterTimeout);
+      if (leaveTimeout) clearTimeout(leaveTimeout);
+      if (bounceTween) bounceTween.kill();
+    });
+  })();
+</script>

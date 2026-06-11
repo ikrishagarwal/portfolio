@@ -1,0 +1,128 @@
+<section
+  id="hero"
+  class="flex flex-col items-center justify-center text-center px-6 py-20 gap-6 border-b border-b-gray-border"
+>
+  <div>
+    <p>
+      <span
+        class="block lg:inline text-sm md:text-lg font-spline-mono pr-7 mb-2 md:mb-0"
+      >
+        <span
+          id="intro"
+          class="inline-block opacity-100"
+          aria-label="Hi! I'm"
+        >
+          0101101
+        </span>{" "}
+        <span
+          id="name"
+          class="inline-block bg-accent text-background px-2 py-1 font-bold rounded-xs"
+        >
+          Krish
+        </span>
+        <span id="dot">.</span>
+      </span>
+      <span class="inline-block hero-text">Software&nbsp;-</span>
+    </p>
+    <p class="hero-text">Developer</p>
+    <div>
+      <p class="hero-text">&&nbsp;Explorer</p>
+      <span
+        id="explorer"
+        class="block max-w-md mt-2 md:mt-0 md:ml-auto text-sm md:text-base font-spline-mono leading-relaxed md:text-right"
+      >
+        An enthusiastic programmer and explorer, who loves to learn
+        and create.
+      </span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrambleTextPlugin, SplitText } from "gsap/all";
+
+  gsap.registerPlugin(ScrambleTextPlugin, SplitText);
+
+  const tl = gsap.timeline();
+  tl.delay(0.5);
+
+  // Animating "Hi! I'm"
+  tl.fromTo(
+    "#intro",
+    { x: -20, opacity: 0 },
+    {
+      duration: 1,
+      x: 0,
+      opacity: 1,
+      scrambleText: {
+        text: "Hi! I'm",
+        chars: "01",
+        speed: 0.3,
+      },
+      ease: "power2.out",
+    },
+  );
+
+  // Animating "Krish"
+  tl.fromTo(
+    "#name",
+    { y: -20, opacity: 0 },
+    {
+      duration: 0.75,
+      y: 0,
+      opacity: 1,
+      ease: "power2.out",
+    },
+    "-=0.5",
+  );
+
+  // Animating the dot
+  tl.fromTo(
+    "#dot",
+    { opacity: 0 },
+    {
+      duration: 0.35,
+      opacity: 1,
+      ease: "power2.out",
+    },
+    "-=0.3",
+  );
+
+  // Animating the hero text characters
+  const split = SplitText.create(".hero-text", { type: "words" });
+
+  tl.fromTo(
+    split.words,
+    { y: -20, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 2,
+      ease: "power2.out",
+      stagger: 0.25,
+    },
+  );
+
+  // Animating the explorer description
+  tl.fromTo(
+    "#explorer",
+    { x: 20, opacity: 0 },
+    {
+      duration: 2,
+      x: 0,
+      opacity: 1,
+      scrambleText: {
+        text: "An enthusiastic programmer and explorer, who loves to learn and create.",
+        chars: "0 1",
+        speed: 0.3,
+      },
+      ease: "power2.out",
+    },
+    "-=1.75",
+  );
+
+  window.addEventListener("beforeunload", () => {
+    split.revert();
+  });
+</script>

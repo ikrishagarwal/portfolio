@@ -1,0 +1,79 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  src: string;
+  link: string;
+  title: string;
+  description: string;
+  tags: string[];
+  index: number;
+  isPrivate?: boolean | null;
+}
+const { src, link, title, description, tags, index, isPrivate } =
+  Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/*.{jpeg,jpg,png,gif}",
+);
+
+if (!images[src])
+  throw new Error(`Image at path ${src} does not exists`);
+---
+
+<a
+  href={link}
+  target="_blank"
+  class="block rounded-xl overflow-hidden mb-8 py-8 bg-zinc-950 work-card border-gray-border"
+>
+  <div class="flex flex-col md:flex-row">
+    {
+      index % 2 === 1 ? (
+        <Image
+          src={import(src)}
+          alt={title}
+          class="w-full md:w-1/2 hidden md:block"
+        />
+      ) : null
+    }
+    <Image
+      src={import(src)}
+      alt={title}
+      class="w-full md:w-1/2 block md:hidden"
+    />
+    <div class="p-4 flex-1 flex flex-col">
+      <div class="flex-1">
+        <h3 class="text-4xl font-semibold font-brand">{title}</h3>
+        <p class="mt-2 text-gray-400 font-spline-mono">
+          {description}
+        </p>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {
+          tags.map((tag) => (
+            <span class="bg-gray-700 text-gray-300 text-sm font-spline-mono px-2 py-1 rounded">
+              {tag}
+            </span>
+          ))
+        }
+        {
+          isPrivate ? (
+            <span class="bg-gray-border border border-gray-400 text-gray-300 text-sm font-spline-mono px-2 py-1 rounded lowercase">
+              Private Project
+            </span>
+          ) : null
+        }
+      </div>
+    </div>
+    {
+      index % 2 === 0 ? (
+        <img
+          src={src}
+          alt={title}
+          class="w-full md:w-1/2 hidden md:block"
+        />
+      ) : null
+    }
+  </div>
+</a>
