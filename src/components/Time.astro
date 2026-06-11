@@ -1,0 +1,23 @@
+<span id="time-display"></span>
+<script>
+  function getFormattedTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const meridiem = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12 || 12;
+
+    const minutesStr = minutes < 10 ? "0" + minutes : minutes;
+
+    return `${hours}:${minutesStr} ${meridiem}`;
+  }
+
+  const timeEl = document.getElementById("time-display");
+  if (timeEl) {
+    timeEl.textContent = getFormattedTime();
+    setInterval(() => {
+      timeEl.textContent = getFormattedTime();
+    }, 60000);
+  }
+</script>

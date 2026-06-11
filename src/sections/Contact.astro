@@ -1,0 +1,94 @@
+<section
+  id="contact"
+  class="min-h-screen w-full bg-background text-secondary px-8 py-20 flex flex-col lg:flex-row"
+>
+  <h1
+    id="contact-heading"
+    class="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 font-brand text-center flex-4"
+  >
+    How about we work on something together?
+  </h1>
+  <div
+    class="max-w-4xl mx-auto mt-20 text-justify text-xl leading-relaxed font-spline-mono font-regular flex-2"
+  >
+    <div class="flex flex-col items-center">
+      <p id="contact-desc" class="mb-6 px-4">
+        I'm always open to discussing new projects, creative ideas, or
+        opportunities to be part of your visions. Feel free to reach
+        out tome via email.
+      </p>
+      <div class="flex flex-row lg:flex-col">
+        <a
+          href="mailto:foronlykrish@gmail.com"
+          class="mr-3 lg:mr-0 cursor-vanish"
+        >
+          <button
+            class="cursor-pointer w-full mt-3 px-4 lg:px-6 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors"
+          >
+            Get in Touch
+          </button>
+        </a>
+        <a href="#" class="cursor-vanish">
+          <button
+            class="cursor-pointer w-full mt-3 px-6 lg:px-15 py-3 bg-amber-50 text-background font-spline-mono font-bold rounded-full hover:bg-amber-100 transition-colors"
+          >
+            Resume
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import {
+    SplitText,
+    ScrollTrigger,
+    ScrambleTextPlugin,
+  } from "gsap/all";
+
+  const heading = document.getElementById("contact-heading");
+  const desc = document.getElementById("contact-desc");
+
+  gsap.registerPlugin(SplitText, ScrollTrigger, ScrambleTextPlugin);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heading,
+      start: "top 80%",
+    },
+  });
+
+  const split = new SplitText(heading, {
+    type: "words",
+  });
+
+  tl.fromTo(
+    split.words,
+    { y: -20, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1.5,
+      ease: "power2.out",
+      stagger: 0.25,
+    },
+  );
+
+  tl.fromTo(
+    desc,
+    { x: -20 },
+    {
+      duration: 2.5,
+      x: 0,
+      scrambleText: {
+        text: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out tome via email.",
+        chars: "0 1",
+        speed: 0.3,
+      },
+      ease: "power2.out",
+    },
+    "<.5",
+  );
+</script>

@@ -1,0 +1,142 @@
+---
+import WorkCard from "@/components/WorkCard.astro";
+
+const workCards = [
+  {
+    src: "/src/images/krix.png",
+    link: "https://krix.now.sh",
+    title: "Krix - A multipurpose Discord bot",
+    description:
+      "Krix is a versatile Discord bot designed to enhance server management and user engagement. With features ranging from moderation tools to fun commands, Krix is the perfect addition to any Discord community.",
+    tags: ["discord", "bot", "typescript", "nodejs"],
+    private: true,
+  },
+  {
+    src: "/src/images/kwiz.png",
+    link: "https://github.com/ikrishagarwal/kwiz",
+    title: "Kwiz - A live quiz platform",
+    description:
+      "Kwiz is a modern quiz website designed to help professors quickly organize live quiz sessions with their students. With a real-time leaderboard and seamless user experience, Kwiz makes learning fun and engaging.",
+    tags: ["react", "tailwind", "websockets", "nodejs"],
+  },
+  {
+    src: "/src/images/keeb.png",
+    link: "https://github.com/ikrishagarwal/Seed75",
+    title: "Seed75 - A handcrafted mechanical keyboard",
+    description:
+      "A completely hand made 75% mechanical keyboard from PCB to case, even the firmware. Designed using KiCad and built using the KMK firmware framework.",
+    tags: ["keyboard", "KiCad", "CAD", "KMK"],
+  },
+  {
+    src: "/src/images/silly-swap.png",
+    link: "https://github.com/ikrishagarwal/silly-swap",
+    title: "Silly Swap - Another swapping algorithm",
+    description:
+      "Made my own algorithm to swap two variables without another variable or any arithmetic or XOR operations. It relies on binary shifting of numbers.",
+    tags: ["algorithms", "C", "bitwise", "binary"],
+  },
+];
+---
+
+<section
+  id="works"
+  class="text-secondary px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
+>
+  <h2
+    id="works-heading"
+    class="text-5xl md:text-8xl font-bold font-brand text-center"
+  >
+    Notable
+    <br class="block md:hidden" />
+    Works
+  </h2>
+  <section class="py-20 overflow-x-hidden">
+    {
+      workCards.map((work, index) => (
+        <WorkCard
+          src={work.src}
+          link={work.link}
+          title={work.title}
+          description={work.description}
+          tags={work.tags}
+          index={index}
+          isPrivate={work.private}
+        />
+      ))
+    }
+  </section>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { SplitText, ScrollTrigger } from "gsap/all";
+
+  const heading = document.getElementById("works-heading");
+
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heading,
+      start: "top 80%",
+    },
+  });
+
+  const split = new SplitText(heading, {
+    type: "chars",
+  });
+  tl.fromTo(
+    split.chars,
+    { x: -20, opacity: 0 },
+    {
+      duration: 1,
+      x: 0,
+      opacity: 1,
+      stagger: 0.05,
+      ease: "back.out",
+    },
+  );
+
+  // Animating the cards
+  gsap.set(".work-card", { scale: 0.9 });
+
+  // create a ScrollTrigger for each card
+  (gsap.utils.toArray(".work-card") as Element[]).forEach(
+    (card, i) => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            once: true,
+          },
+        })
+        .fromTo(
+          card,
+          { x: i & 1 ? -300 : 300, opacity: 0 },
+          {
+            duration: 0.75,
+            x: 0,
+            opacity: 1,
+            stagger: 0.5,
+            ease: "power2.out",
+          },
+        )
+        .to(
+          card,
+          {
+            scale: 1,
+            stagger: 0.5,
+            ease: "back.out(1.7)",
+          },
+          "<0.75",
+        );
+
+      if (
+        window.matchMedia &&
+        window.matchMedia("(pointer: coarse)").matches
+      )
+        return;
+    },
+  );
+</script>

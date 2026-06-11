@@ -1,17 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-gray-border: #444444;
   --color-background: #0c0d0f;
   --color-secondary: #b7ab98;
-  /*--color-accent: #fb5607;*/
   --color-accent: #f59e0b;
+  --color-gray-border: #444444;
   --color-secondary-accent: #904c77;
 
-  /* Fonts */
   --font-brand: "Brockmann", Tahoma, sans-serif;
   --font-spline-mono: "Spline Sans Mono", monospace;
+}
+
+@font-face {
+  font-family: "Brockmann";
+  src: url("/fonts/brockmann.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
 }
 
 html {
@@ -30,7 +34,7 @@ html {
 .sharp-edge {
   position: relative;
   clip-path: polygon(6% 0, 95% 0, 100% 10%, 100% 100%, 0 100%, 0 7%);
-  isolation: isolate; /* ensures pseudo stays behind */
+  isolation: isolate;
   z-index: 1;
 }
 
@@ -39,15 +43,21 @@ html {
   position: absolute;
   inset: 0;
   background: transparent;
-  border: 2px solid #fff; /* your border color */
-  clip-path: inherit; /* same shape! */
+  border: 2px solid #fff;
+  clip-path: inherit;
   z-index: -1;
 }
 
 .nav-links {
-  @apply relative;
+  position: relative;
 }
 
 .nav-underline {
-  @apply block absolute bottom-0 left-0 w-0 bg-secondary h-0.5;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-secondary);
 }

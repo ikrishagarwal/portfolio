@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import NavBar from "@/sections/NavBar.astro";
+import Hero from "@/sections/Hero.astro";
+import Works from "@/sections/Works.astro";
+import About from "@/sections/About.astro";
+import Contact from "@/sections/Contact.astro";
+import Footer from "@/components/Footer.astro";
+import CursorFollower from "@/components/CursorFollower.astro";
+---
+
+<Layout>
+  <script>
+    import Lenis from "lenis";
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/all";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({
+      autoRaf: false,
+      wheelMultiplier: 0.5,
+      lerp: 0.05,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  </script>
+  <CursorFollower />
+  <NavBar />
+  <section id="home" class="min-h-screen w-full bg-background">
+    <section class="flex h-auto">
+      <section class="hidden lg:block w-1/12"></section>
+      <section
+        class="text-secondary border-x border-gray-border border-t-0 flex-1 overflow-x-hidden"
+      >
+        <Hero />
+        <Works />
+        <About />
+        <Contact />
+      </section>
+      <section class="hidden lg:block w-1/12"></section>
+    </section>
+    <Footer />
+  </section>
+</Layout>

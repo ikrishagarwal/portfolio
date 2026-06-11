@@ -1,0 +1,41 @@
+// @ts-check
+import { defineConfig } from "astro/config";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
+
+const SITE_URL = process.env.SITE || "https://ikrish.dev";
+const ignoredURLs = ["/fonts/"];
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// https://astro.build/config
+export default defineConfig({
+  site: SITE_URL,
+
+  vite: {
+    plugins: [
+      tailwindcss({
+        optimize: true,
+      }),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+  },
+
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        for (const url of ignoredURLs) {
+          if (page.startsWith(`${SITE_URL}${url}`)) return false;
+        }
+
+        return true;
+      },
+    }),
+  ],
+});
