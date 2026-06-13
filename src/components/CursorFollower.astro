@@ -64,9 +64,17 @@
 
     type CursorState =
       | { status: "idle" }
-      | { status: "entering"; card: Element; timeout: ReturnType<typeof setTimeout> }
+      | {
+          status: "entering";
+          card: Element;
+          timeout: ReturnType<typeof setTimeout>;
+        }
       | { status: "hovering"; card: Element }
-      | { status: "leaving"; card: Element; timeout: ReturnType<typeof setTimeout> }
+      | {
+          status: "leaving";
+          card: Element;
+          timeout: ReturnType<typeof setTimeout>;
+        }
       | { status: "vanishing" }
       | { status: "hidden" };
 
@@ -74,7 +82,7 @@
     let lastMouseX = 0;
     let lastMouseY = 0;
     let isFirstMove = true;
-    let bounceTween = null;
+    let bounceTween: gsap.core.Tween | null = null;
 
     function transitionTo(newState: CursorState) {
       state = newState;
@@ -124,7 +132,8 @@
     );
 
     const enterCard = (card: Element) => {
-      if (state.status === "vanishing" || state.status === "hidden") return;
+      if (state.status === "vanishing" || state.status === "hidden")
+        return;
 
       if (state.status === "entering") {
         clearTimeout(state.timeout);
@@ -133,18 +142,36 @@
       if (state.status === "leaving") {
         clearTimeout(state.timeout);
         if (state.card === card) {
-          transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
+          transitionTo({
+            status: "entering",
+            card,
+            timeout: setTimeout(
+              () => enterCardTimeout(card),
+              debounceMs,
+            ),
+          });
           return;
         }
       }
 
       if (state.status === "hovering") {
         if (state.card === card) return;
-        transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
+        transitionTo({
+          status: "entering",
+          card,
+          timeout: setTimeout(
+            () => enterCardTimeout(card),
+            debounceMs,
+          ),
+        });
         return;
       }
 
-      transitionTo({ status: "entering", card, timeout: setTimeout(() => enterCardTimeout(card), debounceMs) });
+      transitionTo({
+        status: "entering",
+        card,
+        timeout: setTimeout(() => enterCardTimeout(card), debounceMs),
+      });
     };
 
     function enterCardTimeout(card: Element) {
@@ -177,7 +204,10 @@
     const leaveCard = (card: Element) => {
       if (state.status !== "hovering" || state.card !== card) return;
 
-      const timeout = setTimeout(() => leaveCardTimeout(card), debounceMs);
+      const timeout = setTimeout(
+        () => leaveCardTimeout(card),
+        debounceMs,
+      );
       transitionTo({ status: "leaving", card, timeout });
     };
 
@@ -220,9 +250,15 @@
     }
 
     const enterVanish = () => {
-      if (state.status === "hovering" || state.status === "entering" || state.status === "leaving") return;
+      if (
+        state.status === "hovering" ||
+        state.status === "entering" ||
+        state.status === "leaving"
+      )
+        return;
 
-      if (state.status === "vanishing" || state.status === "hidden") return;
+      if (state.status === "vanishing" || state.status === "hidden")
+        return;
 
       transitionTo({ status: "vanishing" });
 
