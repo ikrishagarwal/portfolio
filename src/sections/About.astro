@@ -9,6 +9,7 @@
     About Me
   </h1>
   <div
+    id="about-container"
     class="max-w-4xl mx-auto mt-20 text-justify text-sm md:text-xl lg:text-2xl leading-relaxed font-spline-mono font-regular"
   >
     <p class="mb-6 about-text">
@@ -60,6 +61,15 @@
     },
   );
 
+  // const t2 = gsap.timeline({
+  //   scrollTrigger: {
+  //     trigger: "#about-container",
+  //     start: "top top",
+  //     end: "+=150%",
+  //     markers: true
+  //   }
+  // });
+
   const aboutSplit = new SplitText(".about-text", {
     type: "words",
     mask: "words",
@@ -69,13 +79,15 @@
     aboutSplit.words,
     { opacity: 0.3 },
     {
-      duration: 3,
+      duration: 1,
       opacity: 1,
       stagger: 0.1,
       ease: "power2.out",
       scrollTrigger: {
-        trigger: ".about-text",
-        start: "top 80%",
+        trigger: heading,
+        start: "center 65%",
+        end: "center 15%%",
+        scrub: true,
       },
     },
   );
