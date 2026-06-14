@@ -1,87 +1,130 @@
+---
+import FooterMarker from "@/images/svg/marker.svg";
+---
+
 <footer
-  class="mx-0 lg:mx-20 px-15 pt-10 border border-gray-border rounded-0 lg:rounded-t-3xl"
+  class="mx-0 lg:mx-20 px-15 pt-10 border border-gray-border rounded-0 lg:rounded-t-3xl relative"
 >
   <div
-    class="font-brand text-secondary text-lg border-b border-dashed border-gray-500"
+    class="font-brand text-secondary text-xl border-b-4 border-gray-border border-dashed"
   >
     <span>krish agarwal</span>
     <span class="float-right hidden md:block">
       let's build something together
     </span>
   </div>
-  <div class="flex flex-col md:flex-row justify-between py-8 gap-6">
+  <div
+    class="flex flex-col md:flex-row justify-between py-8 gap-6 px-4"
+  >
     <div>
-      <h3
-        class="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500"
+      <div
+        class="font-brand uppercase text-secondary text-xl font-medium"
       >
-        Links
-      </h3>
-      <div class="font-spline-mono text-secondary">
-        <a
-          href="#home"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          Home
-        </a>
-        <a
-          href="#works"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          Works
-        </a>
-        <a
-          href="#about"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          About
-        </a>
-        <a
-          href="#contact"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          Contact
-        </a>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://github.com/ikrishagarwal"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">Github</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://www.linkedin.com/in/ikrishagarwal"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">LinkedIn</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://www.instagram.com/coffee.to.code.machine"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">Instagram</span>
+          </a>
+        </div>
       </div>
     </div>
     <div>
-      <h3
-        class="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500"
+      <div
+        class="font-brand uppercase text-secondary text-xl font-medium"
       >
-        Socials
-      </h3>
-      <div class="font-spline-mono text-secondary">
-        <a
-          href="https://github.com/ikrishagarwal"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          Github
-        </a>
-        <a
-          href="https://www.linkedin.com/in/ikrishagarwal"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="https://www.instagram.com/coffee.to.code.machine"
-          class="block mb-2 hover:underline cursor-vanish"
-        >
-          Instagram
-        </a>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://patreon.com/ikrishagarwal?utm_medium=portfolio"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">Patreon</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://ko-fi.com/ikrishagarwal"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">Ko-Fi</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="footer-marker">
+            <FooterMarker />
+          </span>
+          <a
+            href="https://github.com/sponsors/ikrishagarwal"
+            class="block cursor-vanish footer-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="footer-link-bg"></span>
+            <span class="px-2">Sponsor Me</span>
+          </a>
+        </div>
       </div>
     </div>
     <div>
-      <h3
-        class="text-gray-400 mb-4 uppercase font-brand border-b-2 border-gray-500"
-      >
-        Connect
-      </h3>
       <div class="font-spline-mono text-secondary">
         <a
           href="mailto:foronlykrish@gmail.com"
-          class="block mb-2 hover:underline cursor-vanish"
+          class="block cursor-vanish footer-link px-4 leading-none pr-4 md:pr-22"
         >
-          Mail
+          <span class="footer-link-bg"></span>
+          <span class="font-brand block mb-2 leading-none">
+            Email
+          </span>
+          <span class="text-gray-500 text-sm leading-none">
+            foronlykrish@gmail.com
+          </span>
         </a>
       </div>
     </div>
@@ -90,3 +133,43 @@
     &copy; {new Date().getFullYear()} Krish Agarwal. All rights reserved.
   </div>
 </footer>
+
+<script>
+  import gsap from "gsap";
+
+  document.querySelectorAll(".footer-link").forEach((link) => {
+    const bg = link.querySelector(".footer-link-bg");
+    const marker =
+      link.parentElement?.querySelector(".footer-marker");
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to(bg, {
+      scaleY: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+
+    if (marker) {
+      tl.to(
+        marker,
+        {
+          scale: 1.2,
+          rotation: 45,
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        "<",
+      );
+    }
+
+    tl.fromTo(
+      link,
+      { color: "var(--color-secondary)" },
+      { color: "var(--color-background)", duration: 0.1 },
+      "-=0.2",
+    );
+
+    link.addEventListener("mouseenter", () => tl.play());
+    link.addEventListener("mouseleave", () => tl.reverse());
+  });
+</script>

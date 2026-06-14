@@ -61,3 +61,37 @@ html {
   height: 2px;
   background-color: var(--color-secondary);
 }
+
+.footer-link {
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  padding-block: 8px;
+  margin-block: 0;
+}
+
+.footer-link-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: center;
+  z-index: -1;
+}
+
+.footer-link span:not(.footer-link-bg) {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover span:not(.footer-link-bg) {
+  color: var(--color-background);
+}
+
+.footer-marker {
+  color: var(--color-accent);
+  opacity: 0.6;
+  flex-shrink: 0;
+  transform-origin: center;
+}
