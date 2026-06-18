@@ -8,72 +8,56 @@ interface Props {
   title: string;
   description: string;
   tags: string[];
+  topics: string[];
   index: number;
   isPrivate?: boolean | null;
 }
-const { src, link, title, description, tags, index, isPrivate } =
-  Astro.props;
+const { src, link, title, description, tags, topics, index, isPrivate } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/images/*.{jpeg,jpg,png,gif}",
-);
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/images/*.{jpeg,jpg,png,gif}");
 
-if (!images[src])
-  throw new Error(`Image at path ${src} does not exists`);
+if (!images[src]) throw new Error(`Image at path ${src} does not exists`);
 ---
 
-<a
-  href={link}
-  target="_blank"
-  class="block rounded-xl overflow-hidden mb-8 py-8 bg-zinc-950 work-card border-gray-border"
->
+<a href={link} target="_blank" class="block rounded-xl overflow-hidden mb-8 bg-zinc-950 work-card border-gray-border">
   <div class="flex flex-col md:flex-row">
-    {
-      index % 2 === 1 ? (
-        <Image
-          src={images[src]()}
-          alt={title}
-          class="w-full md:w-1/2 hidden md:block"
-        />
-      ) : null
-    }
-    <Image
-      src={images[src]()}
-      alt={title}
-      class="w-full md:w-1/2 block md:hidden"
-    />
-    <div class="p-4 flex-1 flex flex-col">
+    {index % 2 === 1 ? <Image src={images[src]()} alt={title} class="w-full md:w-1/2 hidden md:block" /> : null}
+    <Image src={images[src]()} alt={title} class="w-full md:w-1/2 block md:hidden" />
+    <div class="px-2 md:px-10 py-4 flex-1 flex flex-col">
+      <div class="mb-8 mt-4 flex flex-wrap gap-2 text-gray-300 uppercase">
+        {
+          topics.map((topic) => (
+            <span class="bg-gray-700 text-xs md:text-sm font-spline-mono px-2 md:px-3 py-1 rounded-md mr-0 md:mr-1">
+              {topic}
+            </span>
+          ))
+        }
+      </div>
       <div class="flex-1">
         <h3 class="text-4xl font-semibold font-brand">{title}</h3>
         <p class="mt-2 text-gray-400 font-spline-mono">
           {description}
         </p>
       </div>
-      <div class="mt-4 flex flex-wrap gap-2">
+      <div class="mt-4 flex flex-wrap gap-2 text-gray-600 text-xs">
         {
-          tags.map((tag) => (
-            <span class="bg-gray-700 text-gray-300 text-sm font-spline-mono px-2 py-1 rounded">
-              {tag}
-            </span>
+          tags.map((tag, index) => (
+            <>
+              <span class="text-sm font-spline-mono px-0 md:px-2 py-1">{tag}</span>
+              {index !== tags.length - 1 ? <span class="leading-7.5">•</span> : null}
+            </>
           ))
         }
         {
           isPrivate ? (
-            <span class="bg-gray-border border border-gray-400 text-gray-300 text-sm font-spline-mono px-2 py-1 rounded lowercase">
-              Private Project
-            </span>
+            <>
+              <span class="leading-7.5">•</span>
+              <span class="text-sm font-spline-mono px-0 md:px-2 py-1">private</span>
+            </>
           ) : null
         }
       </div>
     </div>
-    {
-      index % 2 === 0 ? (
-        <Image
-          src={images[src]()}
-          alt={title}
-          class="w-full md:w-1/2 hidden md:block"
-        />
-      ) : null
-    }
+    {index % 2 === 0 ? <Image src={images[src]()} alt={title} class="w-full md:w-1/2 hidden md:block" /> : null}
   </div>
 </a>

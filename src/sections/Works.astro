@@ -3,12 +3,22 @@ import WorkCard from "@/components/WorkCard.astro";
 
 const workCards = [
   {
+    src: "/src/images/technika.png",
+    link: "https://github.com/ikrishagarwal/technika-server",
+    title: "Technika - The Annual Tech Fest",
+    description:
+      "Technika is the annual technical fest at BIT where I handled writing the backend for the event's website which in its lifetime handled over 150K+ API calls and catered over 1K users for the fest. This later became the benchmark for upcoming fest website at the college and were built on the same codebase as a base reference.",
+    tags: ["typescript", "nodejs", "fastify", "firebase"],
+    topics: ["BACKEND", "REST", "API"],
+  },
+  {
     src: "/src/images/krix.png",
     link: "https://krix.now.sh",
     title: "Krix - A multipurpose Discord bot",
     description:
-      "Krix is a versatile Discord bot designed to enhance server management and user engagement. With features ranging from moderation tools to fun commands, Krix is the perfect addition to any Discord community.",
-    tags: ["discord", "bot", "typescript", "nodejs"],
+      "Krix is a versatile Discord Bot designed to enhance server management and user engagement. With features ranging from moderation tools to fun commands, Krix is the perfect addition to any Discord community. Which started as a hobby project now caters over 1 Million users and is a part of some big active servers.",
+    tags: ["typescript", "nodejs", "discord.js"],
+    topics: ["discord", "bot", "API"],
     private: true,
   },
   {
@@ -16,36 +26,33 @@ const workCards = [
     link: "https://github.com/ikrishagarwal/kwiz",
     title: "Kwiz - A live quiz platform",
     description:
-      "Kwiz is a modern quiz website designed to help professors quickly organize live quiz sessions with their students. With a real-time leaderboard and seamless user experience, Kwiz makes learning fun and engaging.",
-    tags: ["react", "tailwind", "websockets", "nodejs"],
+      "Kwiz is a modern quiz website designed to help professors quickly organize live quiz sessions with their students. With a real-time leaderboard and seamless user experience, Kwiz makes learning fun and engaging. Built with a websocket driven real-time layer eliminating lags and any sort of leaks.",
+    tags: ["react", "tailwind", "typescript", "nodejs"],
+    topics: ["Websockets", "deno", "live", "quiz"],
   },
   {
     src: "/src/images/keeb.png",
     link: "https://github.com/ikrishagarwal/Seed75",
     title: "Seed75 - A handcrafted mechanical keyboard",
     description:
-      "A completely hand made 75% mechanical keyboard from PCB to case, even the firmware. Designed using KiCad and built using the KMK firmware framework.",
-    tags: ["keyboard", "KiCad", "CAD", "KMK"],
+      "A completely hand made 75% mechanical keyboard from PCB to case, even the firmware. Designed using KiCad and built using the KMK firmware framework. After building a macropad, going for a full keyboard is the only right decision.",
+    tags: ["QMK", "KMK", "KiCad", "Fusion360"],
+    topics: ["keyboard", "CAD", "Electronics", "Hardware"],
   },
   {
     src: "/src/images/silly-swap.png",
     link: "https://github.com/ikrishagarwal/silly-swap",
     title: "Silly Swap - Another swapping algorithm",
     description:
-      "Made my own algorithm to swap two variables without another variable or any arithmetic or XOR operations. It relies on binary shifting of numbers.",
-    tags: ["algorithms", "C", "bitwise", "binary"],
+      "Deviced an algorithm to swap two numbers without another using a third variable or any arithmetic or XOR operations. Relying on the shifting of binary numbers and compliments of numbers, this algorithm is as good any other method of swapping values of two variables.",
+    tags: ["c", "bitwise", "binary"],
+    topics: ["algorithms", "swap", "shifting"],
   },
 ];
 ---
 
-<section
-  id="works"
-  class="text-secondary px-12 pt-20 border-b border-gray-border border-t-0 flex-1"
->
-  <h2
-    id="works-heading"
-    class="text-5xl md:text-8xl font-bold font-brand text-center"
-  >
+<section id="works" class="text-secondary px-12 pt-20 border-b border-gray-border border-t-0 flex-1">
+  <h2 id="works-heading" class="text-5xl md:text-8xl font-bold font-brand text-center">
     Notable
     <br class="block md:hidden" />
     Works
@@ -61,6 +68,7 @@ const workCards = [
           tags={work.tags}
           index={index}
           isPrivate={work.private}
+          topics={work.topics}
         />
       ))
     }
@@ -101,42 +109,36 @@ const workCards = [
   gsap.set(".work-card", { scale: 0.9 });
 
   // create a ScrollTrigger for each card
-  (gsap.utils.toArray(".work-card") as Element[]).forEach(
-    (card, i) => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            once: true,
-          },
-        })
-        .fromTo(
-          card,
-          { x: i & 1 ? -300 : 300, opacity: 0 },
-          {
-            duration: 0.75,
-            x: 0,
-            opacity: 1,
-            stagger: 0.5,
-            ease: "power2.out",
-          },
-        )
-        .to(
-          card,
-          {
-            scale: 1,
-            stagger: 0.5,
-            ease: "back.out(1.7)",
-          },
-          "<0.75",
-        );
-
-      if (
-        window.matchMedia &&
-        window.matchMedia("(pointer: coarse)").matches
+  (gsap.utils.toArray(".work-card") as Element[]).forEach((card, i) => {
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          once: true,
+        },
+      })
+      .fromTo(
+        card,
+        { x: i & 1 ? -300 : 300, opacity: 0 },
+        {
+          duration: 0.75,
+          x: 0,
+          opacity: 1,
+          stagger: 0.5,
+          ease: "power2.out",
+        },
       )
-        return;
-    },
-  );
+      .to(
+        card,
+        {
+          scale: 1,
+          stagger: 0.5,
+          ease: "back.out(1.7)",
+        },
+        "<0.75",
+      );
+
+    if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
+  });
 </script>
