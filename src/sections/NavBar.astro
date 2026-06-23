@@ -2,39 +2,24 @@
 import Time from "@/components/Time.astro";
 ---
 
-<header
-  id="navbar"
-  class="flex text-secondary border-b border-b-gray-border px-6 py-6 items-center sticky"
->
-  <div
-    class="text-xl flex-1 lg:flex-none cursor-pointer cursor-vanish font-spline-mono"
-    id="name-trigger"
-  >
+<header id="navbar" class="flex text-secondary border-b border-b-gray-border px-6 py-6 items-center sticky">
+  <div class="text-xl flex-1 lg:flex-none cursor-pointer cursor-vanish font-spline-mono" id="name-trigger">
     krish{" "}
-    <span
-      id="name-animated"
-      class="hidden md:inline opacity-0 absolute text-accent"
-    >
-      agarwal
-    </span>
+    <span id="name-animated" class="hidden md:inline opacity-0 absolute text-accent"> agarwal </span>
   </div>
 
   <div class="flex-1 hidden lg:block">
     <nav class="flex justify-center gap-4 font-spline-mono uppercase">
-      <a href="#home" class="nav-links cursor-vanish">
+      <a href="/" class="nav-links cursor-vanish">
         <span class="nav-text">Home</span>
         <span class="nav-underline"></span>
       </a>
-      <a href="#works" class="nav-links cursor-vanish">
+      <a href="/works" class="nav-links cursor-vanish">
         <span class="nav-text">Works</span>
         <span class="nav-underline"></span>
       </a>
-      <a href="#about" class="nav-links cursor-vanish">
-        <span class="nav-text">About</span>
-        <span class="nav-underline"></span>
-      </a>
-      <a href="#contact" class="nav-links cursor-vanish">
-        <span class="nav-text">Contact</span>
+      <a href="https://blog.ikrish.dev" class="nav-links cursor-vanish">
+        <span class="nav-text">Blogs</span>
         <span class="nav-underline"></span>
       </a>
     </nav>
@@ -118,9 +103,7 @@ import Time from "@/components/Time.astro";
   nameTrigger!.addEventListener("mouseleave", revertName);
 
   // Nav link hover animations
-  const navLinks = document.querySelectorAll(
-    ".nav-links",
-  ) as NodeListOf<Element & { tl: gsap.core.Timeline }>;
+  const navLinks = document.querySelectorAll(".nav-links") as NodeListOf<Element & { tl: gsap.core.Timeline }>;
   const navUnderlines = document.querySelectorAll(".nav-underline");
   const navTexts = document.querySelectorAll(".nav-text");
 
@@ -133,11 +116,7 @@ import Time from "@/components/Time.astro";
     if (underline) {
       tl.add("start");
 
-      tl.fromTo(
-        underline,
-        { width: "0%", left: "0%" },
-        { width: "100%", duration: 0.5 },
-      );
+      tl.fromTo(underline, { width: "0%", left: "0%" }, { width: "100%", duration: 0.5 });
 
       tl.to(
         navText,
