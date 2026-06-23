@@ -1,0 +1,158 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const projects: Projects[] = [
+  {
+    title: "Technika 2024",
+    description:
+      "The annual technical fest at BIT where I handled the backend which catered over 150K API calls throughout it's life cycle and handled thousands of users. I also made major contributions to the frontend designs, implementation, and animations",
+    url: "https://github.com/ikrishagarwal/technika-server",
+    tags: ["API", "typescript", "REST", "animations", "payments"],
+  },
+  {
+    title: "Krix Bot",
+    description:
+      "A multi-purpose discord bot to manage your channels, users, and have a fun around, serving over a million users and is a part of multiple major servers",
+    url: "https://krix.now.sh",
+    tags: ["bot", "typescript", "automation"],
+  },
+  {
+    title: "Kwiz - A live quiz platform",
+    description:
+      "Kwiz is a quiz platform designed to organize live quiz sessions at an instant, with a real-time leader board. It's built with a websocket driven real-time layer eliminating lags and any sort of leaks, perfect for quick polls and quizzes",
+    tags: ["react", "typescript", "websocket", "deno"],
+    url: "https://github.com/ikrishagarwal/kwiz",
+  },
+  {
+    title: "Seed75",
+    description:
+      "A completely hand made 75% mechanical keyboard from PCB to case, even the firmware. Designed using KiCad and built using the QMK firmware framework. After building a macropad, going for a full keyboard is the only right decision.",
+    tags: ["QMK", "KiCad", "CAD", "electronics"],
+    url: "https://github.com/ikrishagarwal/Seed75",
+  },
+  {
+    title: "discord http bot template",
+    description:
+      "A quick start template for writing discord http bots in typescript, it utilizes finely picked library supporting the best developer experience with constant updates",
+    url: "https://github.com/ikrishagarwal/discord-http-bot",
+    tags: ["discord", "bot", "template", "typescript"],
+  },
+  {
+    title: "Hoal Music",
+    description:
+      "A cross platform music streaming app to stream music either from internet or your local library, with modern Material 3 UI written in flutter with features like caching and preloading for best UX",
+    tags: ["flutter", "music", "streaming"],
+  },
+  {
+    title: "Air75",
+    description:
+      "A macropad completely hand made, from PCB to case, as well as the firmware. Designed using KiCad and built using the QMK firmware framework. My first work towards my keyboard hobby",
+    tags: ["QMK", "KiCad", "CAD", "electronics"],
+    url: "https://github.com/ikrishagarwal/Air75",
+  },
+  {
+    title: "Sentinel AI",
+    description:
+      "An agentic AI that acts as an safetly layer between a LLM and the user to guard the LLM as well as the user from any kind of malicioius prompt injection attacks, it was majorly a part of a hackathon project which secured us 2nd position",
+    tags: ["AI", "Agentic AI", "LLM"],
+    url: "https://github.com/ikrishagarwal/sentinel-ai",
+  },
+  {
+    title: "Prakrida",
+    description:
+      "The annual sports fest at BIT, where mentored and contributed to the backend system of fest's website which catered a huge audience, serving thousands of players",
+    url: "https://github.com/ikrishagarwal/prakrida-backend",
+    tags: ["API", "REST", "typescript", "payments"],
+  },
+  {
+    title: "Lan App",
+    description:
+      "A PyQt6 project to manager various LAN and WiFi configurations profiles and quickly switch between them without the tedious task of manually writing IPs",
+    tags: ["networks", "python", "Qt"],
+    url: "https://github.com/ikrishagarwal/Lan",
+  },
+  {
+    title: "Stolker Bot",
+    description:
+      "Another disord bot which brings out a lot of AI features to discord chat app, you can summarize long conversations, have fun responses and overall interact with a LLM right inside discord",
+    url: "https://github.com/ikrishagarwal/stolker-bot",
+    tags: ["discord", "typescript", "AI", "gemini"],
+  },
+  {
+    title: "SheSafe API",
+    description:
+      "SheSafe is a women safety AI model, where I handled the communication of AI model with the frontend by delivering an API. The idea aquired us the first place at the Ideathon at MANIT",
+    url: "https://github.com/ikrishagarwal/shesafe-backend/",
+    tags: ["AI", "API", "hackathon"],
+  },
+  {
+    title: "Silly Swap",
+    description:
+      "An algorithm to swap two numbers without a third variable or any arithmetic or XOR operations. Relying on the shifting of binary numbers and compliments of numbers, this algorithm is as good any other method of swapping values",
+    url: "https://github.com/ikrishagarwal/silly-swap",
+    tags: ["C", "algorithm", "bitwise"],
+  },
+  {
+    title: "Discord RPC",
+    description:
+      "A cross platform desktop app to customize rich presence for discord via RPC communication written in Tauri, minimal UI that gets the work done quickly ",
+    tags: ["discord", "rpc", "rust", "tauri"],
+  },
+  {
+    title: "djs-utility",
+    description:
+      "A published NPM package to serve multiple utility features for discord.js community, to make the lives of bot makers easier",
+    tags: ["discord", "typescript", "package", "npm"],
+    url: "https://github.com/ikrishagarwal/djs-utility",
+  },
+];
+
+interface Projects {
+  title: string;
+  description: string;
+  url?: string;
+  tags: string[];
+}
+---
+
+<Layout title="Krish | Works" enableCursor={true}>
+  <section class="min-h-screen w-full text-secondary py-14 md:py-24 mx-auto max-w-4xl px-8">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 font-brand">Things I Made</h1>
+    <hr class="text-gray-600/50 mb-8" />
+    {
+      projects.map((project) => {
+        return (
+          <Fragment>
+            <article class="project-tile">
+              <a href={project.url} class={project.url === null ? "disabled" : null} target="_blank">
+                <p class="project-title font-brand text-xl py-2 transition-colors">{project.title}</p>
+                <p class="font-spline-mono text-sm py-2">{project.description}</p>
+                <p class="font-spline-mono text-sm text-gray-600 flex flex-wrap">
+                  {project.tags.map((tag, index) => (
+                    <Fragment>
+                      <span class="text-sm font-spline-mono pr-1 py-1">{tag}</span>
+                      {index !== project.tags.length - 1 ? <span class="leading-7 pr-1">•</span> : null}
+                    </Fragment>
+                  ))}
+                </p>
+              </a>
+            </article>
+            <hr class="text-gray-600/50 my-4" />
+          </Fragment>
+        );
+      })
+    }
+    <p class="font-spline-mono text-gray-600 text-center text-sm w-full italic">and the list goes on...</p>
+  </section>
+  <script>
+    document.querySelectorAll(".project-tile").forEach((tile) => {
+      tile.addEventListener("mouseenter", () => {
+        tile.querySelector(".project-title")?.classList.add("text-accent");
+      });
+
+      tile.addEventListener("mouseleave", () => {
+        tile.querySelector(".project-title")?.classList.remove("text-accent");
+      });
+    });
+  </script>
+</Layout>
