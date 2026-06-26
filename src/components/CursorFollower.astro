@@ -3,10 +3,7 @@
   class="hidden md:block rounded-full z-9999 pointer-events-none fixed translate-x-[-50%] translate-y-[-50%]"
   aria-hidden="true"
 >
-  <div
-    id="cursor-inner"
-    class="flex justify-center items-center pointer-events-none opacity-0 -rotate-45"
-  >
+  <div id="cursor-inner" class="flex justify-center items-center pointer-events-none opacity-0 -rotate-45">
     <svg
       width="14"
       height="14"
@@ -15,11 +12,7 @@
       xmlns="http://www.w3.org/2000/svg"
       class="text-background"
     >
-      <path
-        d="M5 12h14M12 5l7 7-7 7"
-        stroke="currentColor"
-        class="stroke-2"
-        stroke-linejoin="round"></path>
+      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" class="stroke-2" stroke-linejoin="round"></path>
     </svg>
   </div>
 </div>
@@ -31,10 +24,7 @@
     if (!root || !inner) return;
 
     // hide on touch devices early
-    if (
-      window.matchMedia &&
-      window.matchMedia("(pointer: coarse)").matches
-    ) {
+    if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) {
       root.style.display = "none";
       return;
     }
@@ -127,13 +117,10 @@
     const cards = Array.from(document.querySelectorAll(".work-card"));
 
     // cursor-vanish elements
-    const vanishElements = Array.from(
-      document.querySelectorAll(".cursor-vanish"),
-    );
+    const vanishElements = Array.from(document.querySelectorAll(".cursor-vanish"));
 
     const enterCard = (card: Element) => {
-      if (state.status === "vanishing" || state.status === "hidden")
-        return;
+      if (state.status === "vanishing" || state.status === "hidden") return;
 
       if (state.status === "entering") {
         clearTimeout(state.timeout);
@@ -145,10 +132,7 @@
           transitionTo({
             status: "entering",
             card,
-            timeout: setTimeout(
-              () => enterCardTimeout(card),
-              debounceMs,
-            ),
+            timeout: setTimeout(() => enterCardTimeout(card), debounceMs),
           });
           return;
         }
@@ -159,10 +143,7 @@
         transitionTo({
           status: "entering",
           card,
-          timeout: setTimeout(
-            () => enterCardTimeout(card),
-            debounceMs,
-          ),
+          timeout: setTimeout(() => enterCardTimeout(card), debounceMs),
         });
         return;
       }
@@ -204,10 +185,7 @@
     const leaveCard = (card: Element) => {
       if (state.status !== "hovering" || state.card !== card) return;
 
-      const timeout = setTimeout(
-        () => leaveCardTimeout(card),
-        debounceMs,
-      );
+      const timeout = setTimeout(() => leaveCardTimeout(card), debounceMs);
       transitionTo({ status: "leaving", card, timeout });
     };
 
@@ -250,15 +228,9 @@
     }
 
     const enterVanish = () => {
-      if (
-        state.status === "hovering" ||
-        state.status === "entering" ||
-        state.status === "leaving"
-      )
-        return;
+      if (state.status === "hovering" || state.status === "entering" || state.status === "leaving") return;
 
-      if (state.status === "vanishing" || state.status === "hidden")
-        return;
+      if (state.status === "vanishing" || state.status === "hidden") return;
 
       transitionTo({ status: "vanishing" });
 

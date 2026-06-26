@@ -6,11 +6,29 @@ import "@/styles/global.css";
 
 interface Props {
   title?: string;
+  windowTitle?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  type?: string;
   enableSmoothScroll?: boolean;
   enableCursor?: boolean;
 }
 
-const { title = "Krish | Portfolio", enableSmoothScroll = true, enableCursor = false } = Astro.props;
+const {
+  title = "Krish — Full-Stack Developer & Open Source Enthusiast",
+  windowTitle = "Krish | Portfolio",
+  description = "Portfolio of Krish, who is a passionate full-stack software developer specializing in TypeScript, React, and Node.js. Explore projects ranging from Discord bots to mechanical keyboards and open-source contributions.",
+  keywords = "Krish Agarwal, portfolio, software developer, full-stack developer, web developer, TypeScript, React, Node.js, open source, Discord bot, mechanical keyboard, QMK, KiCad, ikrishagarwal",
+  image = "/images/hero.png",
+  type = "website",
+  enableSmoothScroll = true,
+  enableCursor = false,
+} = Astro.props;
+
+const { origin } = Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, Astro.url.origin);
+const imageURL = new URL(image, origin);
 ---
 
 <!doctype html>
@@ -18,7 +36,41 @@ const { title = "Krish | Portfolio", enableSmoothScroll = true, enableCursor = f
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{windowTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Krish" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Krish | Portfolio" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Krish Agarwal",
+      "url": "https://ikrish.dev",
+      "jobTitle": "Full-Stack Developer",
+      "description": "Full-stack developer specializing in TypeScript, React, and Node.js. Open source enthusiast and mechanical keyboard hobbyist.",
+      "sameAs": [
+        "https://github.com/ikrishagarwal",
+        "https://www.linkedin.com/in/ikrishagarwal",
+      ],
+    })}>
+    </script>
+
     <link rel="preload" href="/fonts/brockmann.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
