@@ -15,6 +15,18 @@ export default defineConfig({
   site: SITE_URL,
 
   vite: {
+    server: {
+      watch: {
+        ignored: [
+          "**/.obsidian/**", //
+          "**/_bases/**",
+          "**/_home/**",
+          "**/_base/**",
+        ],
+        // usePolling: true,
+      },
+    },
+    assetsInclude: ["**/*.base", "**/.obsidian/**", "**/_bases/**"],
     plugins: [
       tailwindcss({
         optimize: true,

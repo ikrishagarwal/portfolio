@@ -1,0 +1,97 @@
+---
+import NavBar from "@/sections/NavBar.astro";
+import Footer from "@/components/Footer.astro";
+import StyledDate from "@/components/date.astro";
+import type { CollectionEntry } from "astro:content";
+import { getImage, Image } from "astro:assets";
+
+import "@/styles/global.css";
+import "@/styles/posts.css";
+
+type Props = CollectionEntry<"blog">["data"];
+const { title, description, coverImage, createdAt, updatedAt, tags } = Astro.props;
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+
+const ogImage = coverImage ? await getImage({ src: coverImage, width: 1200, height: 630, format: "jpg" }) : undefined;
+const ogImageUrl = ogImage?.src && Astro.site ? new URL(ogImage.src, Astro.site).toString() : undefined;
+const twitterCard = ogImageUrl ? "summary_large_image" : "summary";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content={tags.join(" ")} />
+    <meta name="author" content="Krish" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <meta property="article:published_time" content={createdAt.toISOString()} />
+    <meta property="article:modified_time" content={updatedAt.toISOString()} />
+    {tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    <link rel="preload" href="/fonts/brockmann.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-image">
+    <NavBar />
+    <section class="flex justify-center w-full min-h-screen h-full py-2 m-0 mt-2">
+      <article class="max-w-4xl w-full bg-[#171717] text-stone-50 rounded">
+        {
+          coverImage && (
+            <Image
+              src={coverImage}
+              alt={`Cover for ${title}`}
+              class="w-full h-64 object-top-left object-cover rounded-t"
+              loading="eager"
+            />
+          )
+        }
+        <div class="p-10">
+          <header>
+            <div class="text-gray-400 my-3 font-mono">
+              <a href="/blogs/" class="hover:underline">[Back to Home]</a>
+            </div>
+            <h1 class="text-5xl font-brand font-semibold text-secondary">{title}</h1>
+            <p class="my-2">
+              <span class="text-gray-600 font-mono">Last Updates at <StyledDate date={updatedAt} /></span>
+            </p>
+            <div class="my-2 font-spline-mono flex flex-wrap">
+              {
+                tags?.map((tag) => (
+                  <span class="text-sm font-spline-mono px-2 mr-2 rounded-full border border-gray-600/50 text-gray-400">
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+          </header>
+
+          <div class="my-10 text-lg post">
+            <slot />
+          </div>
+        </div>
+      </article>
+    </section>
+    <Footer />
+  </body>
+</html>

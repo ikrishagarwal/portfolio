@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "./global.css";
+
+.post h1 {
+  @apply text-3xl font-brand font-semibold my-2 mt-6;
+}
+
+.post img {
+  @apply my-4 rounded;
+}
+
+.post ul {
+  @apply list-disc list-inside my-4;
+}
+
+.post ul li {
+  @apply my-2;
+}
+
+.post a {
+  @apply text-blue-500 underline;
+}
+
+.post pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg my-4 overflow-x-auto;
+}
+
+.post code {
+  @apply bg-gray-800 text-gray-100 px-1 rounded-lg;
+}
+
+/* Design the scroll bar for code blocks */
+.post pre::-webkit-scrollbar {
+  @apply h-2;
+}
+
+.post pre::-webkit-scrollbar-track {
+  @apply bg-gray-700;
+}
+
+.post pre::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 rounded;
+}
+
+.post blockquote {
+  @apply border-l-4 border-gray-600 pl-4 italic text-gray-400 my-4;
+}
+
+.post table {
+  @apply w-full border-collapse my-4;
+}
+
+.post th,
+.post td {
+  @apply border border-gray-700 px-4 py-2;
+}
+
+.post th {
+  @apply bg-gray-800;
+}
+
+.post p {
+  @apply my-4;
+}
+
+.post h2 {
+  @apply text-2xl font-brand font-semibold my-4 mt-6;
+}
+
+.post h3 {
+  @apply text-xl font-brand font-semibold my-3 mt-5;
+}
+
+.post hr {
+  @apply border-t border-gray-700 my-6;
+}

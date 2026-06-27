@@ -1,0 +1,47 @@
+{
+  "defaultTemplate": "---\ntitle: \"{{title}}\"\ndate: {{date}}\ndescription: \"\"\ntags: []\nimage: \"\"\nimageAlt: \"\"\nimageOG: false\nhideCoverImage: false\nhideTOC: false\ntargetKeyword: \"\"\ndraft: true\n---",
+  "autoInsertProperties": true,
+  "dateFormat": "YYYY-MM-DD",
+  "enableCopyHeadingLink": true,
+  "copyHeadingLinkFormat": "astro",
+  "addTrailingSlashToLinks": true,
+  "enableOpenTerminalCommand": true,
+  "terminalProjectRootPath": "../..",
+  "terminalApplicationName": "",
+  "enableTerminalDebugLogging": false,
+  "enableTerminalRibbonIcon": true,
+  "enableOpenConfigFileCommand": true,
+  "configFilePath": "../../astro.config.mjs",
+  "enableConfigRibbonIcon": true,
+  "contentTypes": [
+    {
+      "id": "content-type-1782548170796-84774yqnn",
+      "name": "Blogs",
+      "folder": "blogs",
+      "linkBasePath": "/blogs/",
+      "template": "---\ntitle: \"{{title}}\"\ncreatedAt: {{date}}\nupdatedAt: {{date}}\ndescription: \"\"\ntags: []\ncoverImage: \"\"\ndraft: true\n---\n",
+      "enabled": true,
+      "creationMode": "folder",
+      "indexFileName": "index",
+      "ignoreSubfolders": false,
+      "enableUnderscorePrefix": false,
+      "modifiedDateField": "createdAt"
+    }
+  ],
+  "migrationCompleted": true,
+  "helpButtonReplacement": {
+    "enabled": true,
+    "commandId": "astro-composer:edit-astro-config",
+    "iconId": "rocket"
+  },
+  "showMdxFilesInExplorer": true,
+  "processBackgroundFileChanges": true,
+  "syncDraftDate": false,
+  "draftDetectionMode": "property",
+  "draftProperty": "",
+  "draftLogic": "true-is-draft",
+  "publishDateField": "",
+  "renameOnTitleClick": false,
+  "updateModifiedDate": false,
+  "modifiedDateField": ""
+}

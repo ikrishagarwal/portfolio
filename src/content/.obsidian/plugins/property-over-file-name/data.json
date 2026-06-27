@@ -1,0 +1,22 @@
+{
+  "propertyKey": "title",
+  "enableForLinking": true,
+  "enableForQuickSwitcher": true,
+  "includeFilenameInSearch": true,
+  "includeAliasesInSearch": true,
+  "enableForDragDrop": true,
+  "useSimpleSearch": false,
+  "enableForGraphView": true,
+  "enableForBacklinks": true,
+  "hideUnlinkedMentionsInBacklinks": false,
+  "enableForTabs": true,
+  "enableForExplorer": false,
+  "folderNoteFilename": "index",
+  "enableForWindowFrame": true,
+  "enableForBookmarks": true,
+  "enableForProperties": true,
+  "enableMdxSupport": true,
+  "quickSwitcherExcludedBehavior": "deemphasize",
+  "linkSuggesterExcludedBehavior": "deemphasize",
+  "enableForWindowTitle": true
+}

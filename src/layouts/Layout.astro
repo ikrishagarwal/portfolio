@@ -29,6 +29,17 @@ const {
 const { origin } = Astro.url;
 const canonicalURL = new URL(Astro.url.pathname, Astro.url.origin);
 const imageURL = new URL(image, origin);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Krish Agarwal",
+  url: "https://ikrish.dev",
+  jobTitle: "Full-Stack Developer",
+  description:
+    "Full-stack developer specializing in TypeScript, React, and Node.js. Open source enthusiast and mechanical keyboard hobbyist.",
+  sameAs: ["https://github.com/ikrishagarwal", "https://www.linkedin.com/in/ikrishagarwal"],
+};
 ---
 
 <!doctype html>
@@ -57,19 +68,7 @@ const imageURL = new URL(image, origin);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
 
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Krish Agarwal",
-      "url": "https://ikrish.dev",
-      "jobTitle": "Full-Stack Developer",
-      "description": "Full-stack developer specializing in TypeScript, React, and Node.js. Open source enthusiast and mechanical keyboard hobbyist.",
-      "sameAs": [
-        "https://github.com/ikrishagarwal",
-        "https://www.linkedin.com/in/ikrishagarwal",
-      ],
-    })}>
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <link rel="preload" href="/fonts/brockmann.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,30 +78,7 @@ const imageURL = new URL(image, origin);
       rel="stylesheet"
     />
   </head>
-  <body class="bg-image">
-    {enableSmoothScroll &&
-      (<script>
-        import Lenis from "lenis";
-        import gsap from "gsap";
-        import { ScrollTrigger } from "gsap/all";
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        const lenis = new Lenis({
-          autoRaf: false,
-          wheelMultiplier: 0.5,
-          lerp: 0.05,
-        });
-
-        lenis.on("scroll", ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-          lenis.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
-      </script>)}
-
+  <body class="bg-image" data-smooth-scroll-enabled={enableSmoothScroll}>
     {enableCursor && <CursorFollower />}
     <NavBar />
     <slot />
@@ -110,6 +86,31 @@ const imageURL = new URL(image, origin);
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "c539d7f820d04d21a853f0b6bd7e7d7a"}'></script>
+      data-cf-beacon='{"token": "c539d7f820d04d21a853f0b6bd7e7d7a"}'
+    ></script>
   </body>
+
+  <script>
+    import Lenis from "lenis";
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/all";
+
+    if (document.body.dataset.smoothScrollEnabled === "true") {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis({
+        autoRaf: false,
+        wheelMultiplier: 0.5,
+        lerp: 0.05,
+      });
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+    }
+  </script>
 </html>

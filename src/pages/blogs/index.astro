@@ -1,0 +1,62 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import StyledDate from "@/components/date.astro";
+import { getCollection } from "astro:content";
+
+const blogs = (await getCollection("blog"))
+  .filter((blog) => false === blog.data.draft)
+  .sort((a, b) => b.data.updatedAt.valueOf() - a.data.updatedAt.valueOf());
+
+const title = "Krish | Blogs";
+const description = "You are welcomed to my blog space where I share my silly thoughts.";
+---
+
+<Layout
+  windowTitle={title}
+  title="Blogs by Krish — Full-Stack Developer & Open Source Enthusiast"
+  description={description}
+  enableSmoothScroll={false}
+>
+  <section class="min-h-screen w-full text-secondary py-14 md:py-24 mx-auto max-w-4xl px-8">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 font-brand">Things worth reading</h1>
+    <p class="my-2 text-secondary">Part of my crib where I share articles and hacks worth sharing</p>
+    <hr class="text-gray-600/50 mb-8" />
+    <div>
+      {blogs.length === 0 && <p class="text-4xl font-spline-mono text-center my-24">No blogs yet :(</p>}
+
+      <div class="my-10 space-y-6">
+        {
+          blogs.map((post) => (
+            <Fragment>
+              <a href={`/blogs/${post.id}`}>
+                <article class=" rounded-sm p-6 hover:bg-mist-900 transition-colors">
+                  <p class="text-3xl font-brand font-semibold">{post.data.title}</p>
+                  <p class="font-spline-mono text-sm py-2">{post.data.description}</p>
+                  <p class="font-spline-mono text-sm text-gray-400 flex flex-wrap my-2">
+                    {post.data.tags?.map((tag) => (
+                      <Fragment>
+                        <span class="text-sm font-spline-mono px-2 mr-2 rounded-full border border-gray-600/50">
+                          {tag}
+                        </span>
+                      </Fragment>
+                    ))}
+                  </p>
+                  <p class="text-gray-600 font-spline-mono text-sm">
+                    Updated on <StyledDate date={post.data.updatedAt} />
+                  </p>
+                </article>
+              </a>
+              <hr class="text-gray-600/50 my-4" />
+            </Fragment>
+          ))
+        }
+      </div>
+
+      {
+        blogs.length !== 0 && (
+          <p class="text-center text-gray-600 font-mono my-6">That's all for now, stay tuned for more updates!</p>
+        )
+      }
+    </div>
+  </section>
+</Layout>
