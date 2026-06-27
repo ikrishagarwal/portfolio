@@ -22,7 +22,7 @@
 }
 
 .post pre {
-  @apply bg-gray-900 text-gray-100 p-4 rounded-lg my-4 overflow-x-auto;
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg my-4;
 }
 
 .post code {
@@ -31,7 +31,7 @@
 
 /* Design the scroll bar for code blocks */
 .post pre::-webkit-scrollbar {
-  @apply h-2;
+  @apply h-1.5;
 }
 
 .post pre::-webkit-scrollbar-track {
