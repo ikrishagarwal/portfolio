@@ -2,6 +2,7 @@
 import NavBar from "@/sections/NavBar.astro";
 import Footer from "@/components/Footer.astro";
 import StyledDate from "@/components/date.astro";
+import SEO from "@/components/SEO.astro";
 import type { CollectionEntry } from "astro:content";
 import { getImage, Image } from "astro:assets";
 
@@ -15,30 +16,53 @@ const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toStri
 
 const ogImage = coverImage ? await getImage({ src: coverImage, width: 1200, height: 630, format: "jpg" }) : undefined;
 const ogImageUrl = ogImage?.src && Astro.site ? new URL(ogImage.src, Astro.site).toString() : undefined;
-const twitterCard = ogImageUrl ? "summary_large_image" : "summary";
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  image: ogImageUrl,
+  datePublished: createdAt.toISOString(),
+  dateModified: updatedAt.toISOString(),
+  author: {
+    "@type": "Person",
+    name: "Krish Agarwal",
+    url: "https://ikrish.dev",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Krish Agarwal",
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalUrl,
+  },
+  keywords: tags?.join(", "),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ikrish.dev" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://ikrish.dev/blogs/" },
+    { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
+  ],
+};
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="keywords" content={tags.join(" ")} />
-    <meta name="author" content="Krish" />
-
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="article" />
-    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-
-    <meta name="twitter:card" content={twitterCard} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    <SEO
+      title={title}
+      description={description}
+      keywords={tags?.join(" ")}
+      canonicalUrl={canonicalUrl}
+      imageUrl={ogImageUrl}
+      type="article"
+      jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+    />
 
     <meta property="article:published_time" content={createdAt.toISOString()} />
     <meta property="article:modified_time" content={updatedAt.toISOString()} />
@@ -71,9 +95,9 @@ const twitterCard = ogImageUrl ? "summary_large_image" : "summary";
             <div class="text-gray-400 my-3 font-mono">
               <a href="/blogs/" class="hover:underline">[Back to Home]</a>
             </div>
-            <h1 class="text-5xl font-brand font-semibold text-secondary">{title}</h1>
+            <h1 class="text-4xl md:text-5xl font-brand font-semibold text-secondary">{title}</h1>
             <p class="my-2">
-              <span class="text-gray-600 font-mono">Last Updates at <StyledDate date={updatedAt} /></span>
+              <span class="text-gray-600 font-mono">Updated At <StyledDate date={updatedAt} /></span>
             </p>
             <div class="my-2 font-spline-mono flex flex-wrap">
               {

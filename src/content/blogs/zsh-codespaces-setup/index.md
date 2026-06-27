@@ -14,11 +14,11 @@ tags:
 coverImage: zsh-codespaces-setup.webp
 draft: false
 ---
-# Setup ZSH
+## Setup ZSH
 
 This post will guide you through to set up starship along with zsh suggestions and zsh syntax highlight for your codespaces.
 
-# Table of Contents
+## Table of Contents
 
 - [Setup Starship](#setup-starship)
 - [Install Auto Suggestions](#install-zsh-auto-suggestions)
@@ -58,7 +58,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosugges
 echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZSOTDIR:-$HOME}/.zshrc
 ```
 
-# [Install ZSH Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/)
+## [Install ZSH Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/)
 
 1. Clone the repository
 
