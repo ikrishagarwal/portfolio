@@ -2,8 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-background: #0c0d0f;
-  --color-secondary: #b7ab98;
+  --color-background: hsl(220 11.1% 5.3%);
+  --color-background-light: hsl(220 11.1% 9.3%);
+  --color-secondary: hsl(37, 18%, 66%);
   --color-accent: #f59e0b;
   --color-gray-border: #444444;
   --color-secondary-accent: #904c77;
@@ -77,6 +78,13 @@ html {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.blogpost {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 
 .bg-image {

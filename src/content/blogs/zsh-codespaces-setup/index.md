@@ -25,12 +25,6 @@ This guide is not just limited to codespaces setup, anyone trying to configure Z
 
 <center>Let's begin!!!</center>
 
-## Table of Contents
-
-- [Setup Starship](#setup-starship)
-- [Install Auto Suggestions](#install-zsh-auto-suggestions)
-- [Install ZSH Syntax Highlighting](#install-zsh-syntax-highlighting)
-
 ## Setup Starship
 
 First of all, we'll be styling our shell to have the modern era look and feel, and it's not that boring dollar sign slammed on your face again. Let's install [starship](https://starship.rs/).
@@ -84,7 +78,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-sy
 echo "source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 ```
 
-_Note: If you see a `Systemd` in the terminal and want to remove it then follow the next command. This one is specific to codespaces.
+*Note: If you see a `Systemd` in the terminal and want to remove it then follow the next command. This one is specific to codespaces.*
 
 ```bash
 mkdir -p ~/.config && printf "[container]\ndisabled = true" >> ~/.config/starship.toml
