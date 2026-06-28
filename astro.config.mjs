@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
+import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import rehypeExternalLinks from "rehype-external-links";
 
 const SITE_URL = process.env.SITE || "https://ikrish.dev";
 const ignoredURLs = ["/fonts/"];
@@ -17,6 +19,17 @@ export default defineConfig({
       theme: "one-dark-pro",
       wrap: true,
     },
+    processor: unified({
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["noopener", "noreferrer"],
+          },
+        ],
+      ],
+    }),
   },
   vite: {
     server: {

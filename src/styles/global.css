@@ -62,6 +62,61 @@
     color: #a6acb9;
     opacity: 0.7;
     pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  pre.astro-code .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a6acb9;
+    padding: 4px;
+  }
+
+  pre.astro-code .copy-btn:hover {
+    background-color: rgba(166, 172, 185, 0.15);
+  }
+
+  pre.astro-code .copy-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  pre.astro-code .copy-btn svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+  }
+
+  pre.astro-code:hover::before {
+    opacity: 0;
+  }
+
+  pre.astro-code:hover .copy-btn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  pre.astro-code .copy-btn.copied {
+    color: #10b981;
+  }
+
+  pre.astro-code .copy-btn.copied svg {
+    stroke: #10b981;
   }
 }
 
