@@ -1,57 +1,43 @@
 # Krish - Portfolio
 
-A modern, animated, and fully responsive developer portfolio built with React, TypeScript, GSAP, Lenis, and Vite.
-Showcasing my work, skills, GitHub activity, and interactive UI concepts with smooth transitions and immersive design.
+A modern, animated, and fully responsive developer portfolio built with Astro, TypeScript, GSAP, Lenis, and Tailwind.
+Showcasing my work, skills, blogs, and interactive UI concepts with smooth transitions and immersive design.
 
-## ✨ Features
+## Features
 
-### 🎨 Beautiful Motion & Interactions
+### Beautiful Motion & Interactions
 
 - Smooth scrolling powered by **Lenis**
 - Elegant animations using **GSAP**
 - Mouse-follow effects and micro-interactions
 - Section-based entrance transitions
 
-### 💼 Project Showcases
+### Project Showcases
 
 - Detailed cards with hover animations
 - Live links + GitHub links
 - Responsive layout
 
-### 📱 Fully Responsive
+### Blogs Section
+
+- Obsidian based CMS for blogs
+- Styled and rendered markdown
+
+### Fully Responsive
 
 - Perfectly designed for desktops, tablets, and mobiles
 
----
+## Built With
 
-## 🛠️ Built With
+| Technology             | Purpose                  |
+| ---------------------- | ------------------------ |
+| **Astro + TypeScript** | Core framework           |
+| **GSAP**               | Page + scroll animations |
+| **Lenis**              | Smooth scrolling engine  |
+| **Tailwind CSS**       | Styling & layout         |
+| **Vercel**             | Deployment               |
 
-| Technology             | Purpose                         |
-| ---------------------- | ------------------------------- |
-| **React + TypeScript** | Core framework                  |
-| **Vite**               | Fast bundling & dev environment |
-| **GSAP**               | Page + scroll animations        |
-| **Lenis**              | Smooth scrolling engine         |
-| **Tailwind CSS**       | Styling & layout                |
-| **Vercel**             | Deployment                      |
-
----
-
-## 📁 Project Structure
-
-```
-portfolio/
-├── src/
-│   ├── components/   # Reusable UI components
-│   ├── sections/     # Home, About, Projects, Contact
-│   └── main.tsx      # App entry
-├── public/
-└── vite.config.ts
-```
-
----
-
-## 🌟 Screenshots
+## Screenshots
 
 | ![](assets/home.png) |
 | -------------------- |
