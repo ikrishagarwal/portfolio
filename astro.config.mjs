@@ -1,10 +1,9 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const SITE_URL = process.env.SITE || "https://ikrish.dev";
 const ignoredURLs = ["/fonts/"];
@@ -15,7 +14,7 @@ export default defineConfig({
   site: SITE_URL,
   markdown: {
     shikiConfig: {
-      theme: "github-dark",
+      theme: "one-dark-pro",
       wrap: true,
     },
   },

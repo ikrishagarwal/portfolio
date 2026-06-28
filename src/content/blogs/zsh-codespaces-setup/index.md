@@ -20,6 +20,11 @@ I was a hard-core user of github's codespaces feature since the day it was launc
 So let's move towards solving this issues, we'll be setting up ZSH (Z-Shell) as an alternative to bash, starship for a modern era terminal look, and then a few must have ZSH plugins to 10x your experience. 
 
 This guide is not just limited to codespaces setup, anyone trying to configure ZSH for a minimal day to day usage can follow the guide as well.
+
+![SpongeBob GIF](spongebob-rainbow.gif)
+
+<center>Let's begin!!!</center>
+
 ## Table of Contents
 
 - [Setup Starship](#setup-starship)
@@ -86,13 +91,14 @@ mkdir -p ~/.config && printf "[container]\ndisabled = true" >> ~/.config/starshi
 ```
 
 **Voila! You are ready to use ZSH with Starship and ZSH Auto Suggestions and Syntax Highlighting.**
-
 ## Bonus: Let's automate the process
 Instead of manually doing all this process again and again for every new codespace you create, we'll be setting up global configs for codespaces to automatically configure your ZSH upon creation.
+
 1. Go to your github and create a new repository with the `dotfiles`, make sure it's in format `https://github.com/<your username>/dotfiles`.
 2. Create a file `setup.sh` on the root of your repository.
 3. And paste the following content into it:
-```sh
+
+```bash
 # Install and configure Starship
 curl -sS https://starship.rs/install.sh | sh -s -- --yes
 echo "eval \"\$(starship init zsh)\"" >> ${ZSOTDIR:-$HOME}/.zshrc

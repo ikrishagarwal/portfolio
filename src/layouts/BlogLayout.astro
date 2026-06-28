@@ -7,10 +7,12 @@ import type { CollectionEntry } from "astro:content";
 import { getImage, Image } from "astro:assets";
 
 import "@/styles/global.css";
-import "@/styles/posts.css";
 
 type Props = CollectionEntry<"blog">["data"];
-const { title, description, coverImage, createdAt, updatedAt, tags } = Astro.props;
+const { description, coverImage, createdAt, updatedAt, tags } = Astro.props;
+
+const heading = Astro.props.title;
+const title = `${heading} | Krish`;
 
 const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
 
@@ -84,7 +86,7 @@ const breadcrumbJsonLd = {
           coverImage && (
             <Image
               src={coverImage}
-              alt={`Cover for ${title}`}
+              alt={`Cover for ${heading}`}
               class="w-full h-64 object-top-left object-cover rounded-t"
               loading="eager"
             />
@@ -95,7 +97,7 @@ const breadcrumbJsonLd = {
             <div class="text-gray-400 my-3 font-mono">
               <a href="/blogs/" class="hover:underline">[Back to Home]</a>
             </div>
-            <h1 class="text-4xl md:text-5xl font-brand font-semibold text-secondary">{title}</h1>
+            <h1 class="text-4xl md:text-5xl font-brand font-semibold text-secondary">{heading}</h1>
             <p class="my-2">
               <span class="text-gray-600 font-mono">Updated At <StyledDate date={updatedAt} /></span>
             </p>
@@ -110,7 +112,7 @@ const breadcrumbJsonLd = {
             </div>
           </header>
 
-          <div class="my-10 text-lg post">
+          <div class="my-10 text-lg">
             <slot />
           </div>
         </div>

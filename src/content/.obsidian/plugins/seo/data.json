@@ -9,7 +9,7 @@
   "slugProperty": "",
   "useFilenameAsSlug": true,
   "parentFolderSlugFilename": "index",
-  "titlePrefixSuffix": "",
+  "titlePrefixSuffix": "Krish",
   "checkTitleLength": true,
   "checkHeadingOrder": true,
   "checkAltText": true,
@@ -149,7 +149,7 @@
         "titleLength": [
           {
             "passed": true,
-            "message": "Good title length: 40 characters",
+            "message": "Good title length: 46 characters (Setup guide for ZSH in GitHub codespaces + \" Krish\")",
             "severity": "info"
           }
         ],
@@ -162,10 +162,9 @@
         ],
         "titleH1Uniqueness": [
           {
-            "passed": false,
-            "message": "Meta title and H1 are identical",
-            "suggestion": "Modify one to be unique, or specify a suffix/prefix in plugin settings",
-            "severity": "warning"
+            "passed": true,
+            "message": "Meta title and H1 are unique (prefix/suffix configured)",
+            "severity": "info"
           }
         ],
         "keywordInTitle": [],
@@ -184,7 +183,7 @@
         "contentLength": [
           {
             "passed": true,
-            "message": "Good content length: 553 words",
+            "message": "Good content length: 557 words",
             "severity": "info"
           }
         ],
@@ -194,7 +193,7 @@
         "altText": [
           {
             "passed": true,
-            "message": "No media elements in this post",
+            "message": "All media elements have alt text",
             "severity": "info"
           }
         ],
@@ -234,7 +233,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 31,
+              "line": 36,
               "searchText": "https://starship.rs/",
               "context": "## Setup Starship\n\nFirst of all, we'll be styling our shell to have the modern era look and feel, and it's not that boring dollar sign slammed on your face again. Let's install [starship](https://starship.rs/).\n\n### Install starship"
             }
@@ -245,7 +244,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 47,
+              "line": 52,
               "searchText": "https://starship.rs/presets/",
               "context": "```\n\nYou can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins."
             }
@@ -256,7 +255,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 47,
+              "line": 52,
               "searchText": "https://starship.rs/presets/nerd-font",
               "context": "```\n\nYou can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins."
             }
@@ -267,7 +266,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 49,
+              "line": 54,
               "searchText": "https://ohmyz.sh/",
               "context": "You can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one."
             }
@@ -278,7 +277,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 51,
+              "line": 56,
               "searchText": "https://github.com/zsh-users/zsh-autosuggestions ",
               "context": "This guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one.\n\n1. Clone the repository"
             }
@@ -289,7 +288,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 68,
+              "line": 73,
               "searchText": "https://github.com/zsh-users/zsh-syntax-highlighting/",
               "context": "\n## Syntax Highlighting in ZSH\nYou must be bored by now starring at that boring mono colored grey text on your terminal, so let's add some colors to it. We'll use [ZSH Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/) plugin to get a colorful looking shell.\n\n1. Clone the repository"
             }
@@ -300,7 +299,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 112,
+              "line": 118,
               "searchText": "https://github.com/ikrishagarwal/dotfiles/blob/main/setup.sh",
               "context": "```\n\nAnd you're done! For reference you may have a look to my [dotfiles](https://github.com/ikrishagarwal/dotfiles/blob/main/setup.sh)."
             }
@@ -311,7 +310,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 51,
+              "line": 56,
               "searchText": "https://github.com/zsh-users/zsh-autosuggestions",
               "context": "This guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one.\n\n1. Clone the repository"
             }
@@ -320,14 +319,14 @@
         "readingLevel": [
           {
             "passed": true,
-            "message": "Good reading level: 7.7 (Easy to read)",
+            "message": "Good reading level: 7.6 (Easy to read)",
             "severity": "info"
           }
         ]
       },
-      "overallScore": 93,
+      "overallScore": 100,
       "issuesCount": 0,
-      "warningsCount": 1,
+      "warningsCount": 0,
       "noticesCount": 8
     }
   ],

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-background: #0c0d0f;
@@ -10,6 +11,57 @@
   --font-brand: "Brockmann", Tahoma, sans-serif;
   --font-spline-mono: "Spline Sans Mono", monospace;
   --font-mono: "Spline Sans Mono", monospace;
+}
+
+@utility prose {
+  & code::before {
+    content: none !important;
+  }
+  & code::after {
+    content: none !important;
+  }
+
+  & :not(pre) > code {
+    font-family: var(--font-spline-mono);
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #eb5757;
+    background-color: rgba(135, 131, 120, 0.15);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+  }
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+  }
+
+  pre.astro-code {
+    position: relative;
+    padding: 1.75rem 1.25rem 1.75rem 1.25rem;
+    font-family: var(--font-spline-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border-radius: 6px;
+    border: 1px solid #2f2f2f;
+    background-color: #1e1e1e !important;
+    overflow-x: auto;
+  }
+
+  pre.astro-code::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a6acb9;
+    opacity: 0.7;
+    pointer-events: none;
+  }
 }
 
 @font-face {
