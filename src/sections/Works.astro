@@ -76,7 +76,7 @@ const workCards = [
   <div class="flex flex-col items-center mb-14">
     <a href="/works" class="mr-3 lg:mr-0 cursor-vanish">
       <button
-        class="cursor-pointer w-full max-w-md px-18 lg:px-24 py-3 bg-secondary text-background font-spline-mono font-bold rounded-xl hover:bg-accent transition-colors"
+        class="cursor-pointer w-full max-w-md px-18 lg:px-24 py-3 bg-secondary text-background font-spline-mono font-bold rounded-xl md:hover:bg-accent transition-colors"
       >
         See More
       </button>
@@ -148,6 +148,6 @@ const workCards = [
         "<0.75",
       );
 
-    if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia && window.matchMedia("(min-width: 768px)").matches) return;
   });
 </script>

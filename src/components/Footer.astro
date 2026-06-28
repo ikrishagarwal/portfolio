@@ -9,7 +9,7 @@ import FooterMarker from "@/images/svg/marker.svg";
   </div>
   <div class="flex flex-col md:flex-row justify-between py-8 gap-6 px-4">
     <div>
-      <div class="font-brand uppercase text-secondary text-xl font-medium">
+      <div class="font-brand uppercase text-secondary text-lg lg:text-xl font-medium">
         <div class="flex items-center gap-3">
           <span class="footer-marker">
             <FooterMarker />
@@ -55,7 +55,7 @@ import FooterMarker from "@/images/svg/marker.svg";
       </div>
     </div>
     <div>
-      <div class="font-brand uppercase text-secondary text-lg md:text-xl font-medium">
+      <div class="font-brand uppercase text-secondary text-lg lg:text-xl font-medium">
         <div class="flex items-center gap-3">
           <span class="footer-marker">
             <FooterMarker />
@@ -102,7 +102,7 @@ import FooterMarker from "@/images/svg/marker.svg";
     </div>
     <div>
       <div class="font-spline-mono text-secondary">
-        <a href="mailto:foronlykrish@gmail.com" class="block cursor-vanish footer-link px-4 leading-none pr-4 md:pr-22">
+        <a href="mailto:foronlykrish@gmail.com" class="block cursor-vanish footer-link pl-4 leading-none pr-0 lg:pr-22">
           <span class="footer-link-bg"></span>
           <span class="font-brand block mb-2 leading-none"> Email </span>
           <span class="text-gray-500 text-sm leading-none"> foronlykrish@gmail.com </span>
@@ -118,33 +118,57 @@ import FooterMarker from "@/images/svg/marker.svg";
 <script>
   import gsap from "gsap";
 
-  document.querySelectorAll(".footer-link").forEach((link) => {
-    const bg = link.querySelector(".footer-link-bg");
-    const marker = link.parentElement?.querySelector(".footer-marker");
-    const tl = gsap.timeline({ paused: true });
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
 
-    tl.to(bg, {
-      scaleY: 1,
-      duration: 0.3,
-      ease: "power2.out",
+  const setupFooterLinks = (isDesktop: boolean) => {
+    document.querySelectorAll(".footer-link").forEach((link) => {
+      const bg = link.querySelector(".footer-link-bg");
+      const marker = link.parentElement?.querySelector(".footer-marker");
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(bg, {
+        scaleY: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      if (marker) {
+        tl.to(
+          marker,
+          {
+            scale: 1.2,
+            rotation: 45,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          "<",
+        );
+      }
+
+      tl.fromTo(link, { color: "var(--color-secondary)" }, { color: "var(--color-background)", duration: 0.1 }, "-=0.2");
+
+      // Remove existing listeners
+      link.removeEventListener("mouseenter", handleMouseEnter);
+      link.removeEventListener("mouseleave", handleMouseLeave);
+
+      if (isDesktop) {
+        link.addEventListener("mouseenter", handleMouseEnter);
+        link.addEventListener("mouseleave", handleMouseLeave);
+      }
+
+      function handleMouseEnter() {
+        tl.play();
+      }
+
+      function handleMouseLeave() {
+        tl.reverse();
+      }
     });
+  };
 
-    if (marker) {
-      tl.to(
-        marker,
-        {
-          scale: 1.2,
-          rotation: 45,
-          duration: 0.3,
-          ease: "power2.out",
-        },
-        "<",
-      );
-    }
+  // Initial setup
+  setupFooterLinks(mediaQuery.matches);
 
-    tl.fromTo(link, { color: "var(--color-secondary)" }, { color: "var(--color-background)", duration: 0.1 }, "-=0.2");
-
-    link.addEventListener("mouseenter", () => tl.play());
-    link.addEventListener("mouseleave", () => tl.reverse());
-  });
+  // Update on resize
+  mediaQuery.addEventListener("change", (e) => setupFooterLinks(e.matches));
 </script>

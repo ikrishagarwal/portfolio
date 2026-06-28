@@ -154,13 +154,18 @@ html {
   transition: color 0.3s ease;
 }
 
-.footer-link:hover span:not(.footer-link-bg) {
-  color: var(--color-background);
-}
-
 .footer-marker {
   color: var(--color-accent);
   opacity: 0.6;
   flex-shrink: 0;
   transform-origin: center;
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-secondary);
+  transform-origin: center;
+  transition: none;
 }

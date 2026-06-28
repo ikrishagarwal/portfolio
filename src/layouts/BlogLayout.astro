@@ -95,7 +95,7 @@ const breadcrumbJsonLd = {
         <div class="p-10">
           <header>
             <div class="text-gray-400 my-3 font-mono">
-              <a href="/blogs/" class="hover:underline">[Back to Home]</a>
+              <a href="/blogs/" class="md:hover:underline">[Back to Home]</a>
             </div>
             <h1 class="text-4xl md:text-5xl font-brand font-semibold text-secondary">{heading}</h1>
             <p class="my-2">
@@ -104,7 +104,7 @@ const breadcrumbJsonLd = {
             <div class="my-2 font-spline-mono flex flex-wrap">
               {
                 tags?.map((tag) => (
-                  <span class="text-sm font-spline-mono px-2 mr-2 rounded-full border border-gray-600/50 text-gray-400">
+                  <span class="text-sm font-spline-mono px-2 mr-2 my-1 rounded-full border border-gray-600/50 text-gray-400">
                     {tag}
                   </span>
                 ))

@@ -23,12 +23,6 @@
     const inner = document.getElementById("cursor-inner");
     if (!root || !inner) return;
 
-    // hide on touch devices early
-    if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) {
-      root.style.display = "none";
-      return;
-    }
-
     const defaultSize = 38;
     const debounceMs = 80;
     const vanishDuration = 0.3;

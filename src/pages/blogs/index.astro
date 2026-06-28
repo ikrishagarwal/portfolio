@@ -29,16 +29,14 @@ const description = "You are welcomed to my blog space where I share my silly th
           blogs.map((post) => (
             <Fragment>
               <a href={`/blogs/${post.id}`}>
-                <article class=" rounded-sm p-6 hover:bg-mist-900 transition-colors">
+                <article class=" rounded-sm p-6 md:hover:bg-mist-900 transition-colors">
                   <p class="text-2xl md:text-3xl font-brand font-semibold">{post.data.title}</p>
                   <p class="font-spline-mono text-sm py-2">{post.data.description}</p>
                   <p class="font-spline-mono text-sm text-gray-400 flex flex-wrap my-2">
                     {post.data.tags?.map((tag) => (
-                      <Fragment>
-                        <span class="text-sm font-spline-mono px-2 mr-2 rounded-full border border-gray-600/50">
-                          {tag}
-                        </span>
-                      </Fragment>
+                      <span class="text-sm font-spline-mono px-2 mr-2 my-1 rounded-full border border-gray-600/50">
+                        {tag}
+                      </span>
                     ))}
                   </p>
                   <p class="text-gray-600 font-spline-mono text-sm">

@@ -5,7 +5,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client", "astro/client"],
+    "types": ["astro/client"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -13,7 +13,8 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "composite": true,
+    "noEmit": false,
 
     /* Linting */
     "strict": true,
@@ -31,5 +32,6 @@
       "@/*": ["src/*"],
     },
   },
-  "include": ["src"],
+  "include": ["src/**/*", ".astro/types.d.ts"],
+  "exclude": ["src/**/*.d.ts"],
 }
