@@ -4,8 +4,8 @@ import StyledDate from "@/components/date.astro";
 import { getCollection } from "astro:content";
 
 const blogs = (await getCollection("blog"))
-  .filter((blog) => false === blog.data.draft)
-  .sort((a, b) => b.data.updatedAt.valueOf() - a.data.updatedAt.valueOf());
+  .filter((blog) => import.meta.env.DEV || false === blog.data.draft)
+  .sort((a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf());
 
 const title = "Krish | Blogs";
 const description = "You are welcomed to my blog space where I share my silly thoughts.";

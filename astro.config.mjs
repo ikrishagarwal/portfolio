@@ -7,7 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import rehypeExternalLinks from "rehype-external-links";
 
-const SITE_URL = process.env.SITE || "https://ikrish.dev";
+const SITE_URL = process.env.SITE || "https://www.ikrish.dev";
 const ignoredURLs = ["/fonts/"];
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

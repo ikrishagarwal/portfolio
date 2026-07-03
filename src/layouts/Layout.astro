@@ -27,15 +27,14 @@ const {
   enableCursor = false,
 } = Astro.props;
 
-const { origin } = Astro.url;
-const canonicalURL = new URL(Astro.url.pathname, Astro.url.origin);
-const imageURL = new URL(image, origin);
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : new URL(Astro.url.pathname, Astro.url.origin);
+const imageURL = Astro.site ? new URL(image, Astro.site) : new URL(image, Astro.url.origin);
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Krish Agarwal",
-  url: "https://ikrish.dev",
+  url: "https://www.ikrish.dev",
   jobTitle: "Full-Stack Developer",
   description:
     "Full-stack developer specializing in TypeScript, React, and Node.js. Open source enthusiast and mechanical keyboard hobbyist.",
@@ -73,11 +72,8 @@ const jsonLd = {
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "c539d7f820d04d21a853f0b6bd7e7d7a"}'
-    ></script>
-  </body>
-
-  <script>
+      data-cf-beacon='{"token": "c539d7f820d04d21a853f0b6bd7e7d7a"}'></script>
+  </body><script>
     import Lenis from "lenis";
     import gsap from "gsap";
     import { ScrollTrigger } from "gsap/all";
