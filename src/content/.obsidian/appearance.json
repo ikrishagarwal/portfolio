@@ -3,7 +3,8 @@
   "showViewHeader": true,
   "showRibbon": false,
   "enabledCssSnippets": [
-    "astro-modular-styling"
+    "astro-modular-styling",
+    "center-image"
   ],
   "theme": "system",
   "accentColor": ""

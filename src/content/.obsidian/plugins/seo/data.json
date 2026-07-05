@@ -183,7 +183,7 @@
         "contentLength": [
           {
             "passed": true,
-            "message": "Good content length: 557 words",
+            "message": "Good content length: 541 words",
             "severity": "info"
           }
         ],
@@ -233,7 +233,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 36,
+              "line": 30,
               "searchText": "https://starship.rs/",
               "context": "## Setup Starship\n\nFirst of all, we'll be styling our shell to have the modern era look and feel, and it's not that boring dollar sign slammed on your face again. Let's install [starship](https://starship.rs/).\n\n### Install starship"
             }
@@ -244,7 +244,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 52,
+              "line": 46,
               "searchText": "https://starship.rs/presets/",
               "context": "```\n\nYou can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins."
             }
@@ -255,7 +255,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 52,
+              "line": 46,
               "searchText": "https://starship.rs/presets/nerd-font",
               "context": "```\n\nYou can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins."
             }
@@ -266,7 +266,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 54,
+              "line": 48,
               "searchText": "https://ohmyz.sh/",
               "context": "You can go over more themes on [starship's website](https://starship.rs/presets/) and I personally like the [Nerd Font Preset](https://starship.rs/presets/nerd-font) and that's also the won't on the banner of this guide.\n## Installing ZSH Plugins\nThis guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one."
             }
@@ -277,7 +277,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 56,
+              "line": 50,
               "searchText": "https://github.com/zsh-users/zsh-autosuggestions ",
               "context": "This guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one.\n\n1. Clone the repository"
             }
@@ -288,7 +288,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 73,
+              "line": 67,
               "searchText": "https://github.com/zsh-users/zsh-syntax-highlighting/",
               "context": "\n## Syntax Highlighting in ZSH\nYou must be bored by now starring at that boring mono colored grey text on your terminal, so let's add some colors to it. We'll use [ZSH Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/) plugin to get a colorful looking shell.\n\n1. Clone the repository"
             }
@@ -299,7 +299,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 118,
+              "line": 112,
               "searchText": "https://github.com/ikrishagarwal/dotfiles/blob/main/setup.sh",
               "context": "```\n\nAnd you're done! For reference you may have a look to my [dotfiles](https://github.com/ikrishagarwal/dotfiles/blob/main/setup.sh)."
             }
@@ -310,7 +310,7 @@
             "suggestion": "To find if any of these are broken, use the 'Check external links for 404s' button to trigger it.",
             "severity": "notice",
             "position": {
-              "line": 56,
+              "line": 50,
               "searchText": "https://github.com/zsh-users/zsh-autosuggestions",
               "context": "This guide is to get the work done as quickly as possible so we'll be relying on directly installing and invoking plugins from `.zshrc` directly. If you are following this guide for a day to day usage then I'd recommend you to use [Oh My ZSH](https://ohmyz.sh/) for invoking plugins so that it's way easier to manage plugins.\n## Auto Completions in ZSH\nWe'll be setting up auto completions in ZSH, so that you can quickly reuse past used combinations by hitting tab without having to write it every time. We'll be using [ZSH autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions ) for this one.\n\n1. Clone the repository"
             }
@@ -319,7 +319,7 @@
         "readingLevel": [
           {
             "passed": true,
-            "message": "Good reading level: 7.6 (Easy to read)",
+            "message": "Good reading level: 7.1 (Easy to read)",
             "severity": "info"
           }
         ]
@@ -328,6 +328,110 @@
       "issuesCount": 0,
       "warningsCount": 0,
       "noticesCount": 8
+    },
+    {
+      "file": "blogs/wifi-issues-on-arch/index.md",
+      "displayName": "Solving the Wi-Fi Disconnect Loop on Arch Linux",
+      "checks": {
+        "titleLength": [
+          {
+            "passed": true,
+            "message": "Good title length: 53 characters (Solving the Wi-Fi Disconnect Loop on Arch Linux + \" Krish\")",
+            "severity": "info"
+          }
+        ],
+        "metaDescription": [
+          {
+            "passed": true,
+            "message": "Good description length: 153 characters",
+            "severity": "info"
+          }
+        ],
+        "titleH1Uniqueness": [
+          {
+            "passed": true,
+            "message": "Meta title and H1 are unique (prefix/suffix configured)",
+            "severity": "info"
+          }
+        ],
+        "keywordInTitle": [],
+        "keywordInDescription": [],
+        "keywordInHeadings": [],
+        "keywordInSlug": [],
+        "slugFormat": [],
+        "keywordDensity": [],
+        "headingOrder": [
+          {
+            "passed": true,
+            "message": "Heading structure is correct",
+            "severity": "info"
+          }
+        ],
+        "contentLength": [
+          {
+            "passed": true,
+            "message": "Good content length: 1188 words",
+            "severity": "info"
+          }
+        ],
+        "duplicateTitles": [],
+        "duplicateDescriptions": [],
+        "duplicateContent": [],
+        "altText": [
+          {
+            "passed": true,
+            "message": "All media elements have alt text",
+            "severity": "info"
+          }
+        ],
+        "imageFileNames": [
+          {
+            "passed": true,
+            "message": "All images have good file names",
+            "severity": "info"
+          }
+        ],
+        "nakedLinks": [
+          {
+            "passed": true,
+            "message": "No naked links found",
+            "severity": "info"
+          }
+        ],
+        "brokenLinks": [
+          {
+            "passed": true,
+            "message": "No broken internal links found",
+            "severity": "info"
+          }
+        ],
+        "potentiallyBrokenLinks": [
+          {
+            "passed": true,
+            "message": "No potentially broken links found",
+            "severity": "info"
+          }
+        ],
+        "potentiallyBrokenEmbeds": [],
+        "externalBrokenLinks": [
+          {
+            "passed": true,
+            "message": "No external links found",
+            "severity": "info"
+          }
+        ],
+        "readingLevel": [
+          {
+            "passed": true,
+            "message": "Good reading level: 7.0 (Easy to read)",
+            "severity": "info"
+          }
+        ]
+      },
+      "overallScore": 100,
+      "issuesCount": 0,
+      "warningsCount": 0,
+      "noticesCount": 0
     }
   ],
   "lastScanTimestamp": 1767334975072,

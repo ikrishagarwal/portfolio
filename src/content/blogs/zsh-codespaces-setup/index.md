@@ -11,7 +11,7 @@ tags:
   - shell
   - terminal
   - linux
-coverImage: zsh-codespaces-setup.webp
+coverImage: zsh-codespaces-terminal.png
 draft: false
 ---
 ## Lore

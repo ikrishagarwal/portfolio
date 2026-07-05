@@ -25,7 +25,7 @@
       "indexFileName": "index",
       "ignoreSubfolders": false,
       "enableUnderscorePrefix": false,
-      "modifiedDateField": "createdAt"
+      "modifiedDateField": "updatedAt"
     }
   ],
   "migrationCompleted": true,
