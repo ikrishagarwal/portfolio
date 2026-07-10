@@ -130,6 +130,13 @@
       "type": "existing",
       "hidden": false,
       "mdOnly": false
+    },
+    {
+      "id": "plugin-languagetool-status-bar-item-icon-lt-status-bar-btn;1",
+      "name": "plugin-languagetool-status-bar-item-icon-lt-status",
+      "type": "existing",
+      "hidden": false,
+      "mdOnly": false
     }
   ],
   "explorerCommands": [],
@@ -165,7 +172,7 @@
     {
       "id": "native-collapseAll",
       "name": "Collapse all",
-      "ariaLabel": "Expand all",
+      "ariaLabel": "Collapse all",
       "type": "native",
       "hidden": false
     },
