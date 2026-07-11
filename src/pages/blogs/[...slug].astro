@@ -16,7 +16,7 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} slug={post.id}>
   <div class="prose prose-neutral max-w-none prose-invert">
     <Content />
   </div>

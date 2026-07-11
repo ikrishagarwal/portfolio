@@ -33,3 +33,4 @@ dist-ssr
 **/.obsidian/workspace-mobile.json
 **/.obsidian/plugins/*/main.js
 .ref/
+.vercel

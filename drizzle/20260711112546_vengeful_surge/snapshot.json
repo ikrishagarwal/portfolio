@@ -1,0 +1,60 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "dcbacf5d-fa63-4c15-94d8-39b442ec416e",
+  "prevIds": [
+    "cd5ebf96-e1af-4a63-b3e0-35ab2e44984e"
+  ],
+  "ddl": [
+    {
+      "isRlsEnabled": false,
+      "name": "blogs",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "slug",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "blogs"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "views",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "blogs"
+    },
+    {
+      "columns": [
+        "slug"
+      ],
+      "nameExplicit": false,
+      "name": "blogs_pkey",
+      "schema": "public",
+      "table": "blogs",
+      "entityType": "pks"
+    },
+    {
+      "value": "\"views\" > 0",
+      "name": "view_must_be_positive",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "blogs"
+    }
+  ],
+  "renames": []
+}

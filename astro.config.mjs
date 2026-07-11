@@ -1,11 +1,13 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import rehypeExternalLinks from "rehype-external-links";
+
+import vercel from "@astrojs/vercel";
 
 const SITE_URL = process.env.SITE || "https://www.ikrish.dev";
 const ignoredURLs = ["/fonts/"];
@@ -14,6 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
+
   markdown: {
     shikiConfig: {
       theme: "one-dark-pro",
@@ -31,6 +34,7 @@ export default defineConfig({
       ],
     }),
   },
+
   vite: {
     server: {
       watch: {
@@ -56,6 +60,15 @@ export default defineConfig({
     },
   },
 
+  env: {
+    schema: {
+      POSTGRE_DATABASE_URL: envField.string({ context: "server", access: "secret", optional: false }),
+      UPSTASH_REDIS_REST_URL: envField.string({ context: "server", access: "secret", optional: false }),
+      UPSTASH_REDIS_REST_TOKEN: envField.string({ context: "server", access: "secret", optional: false }),
+      CRON_SECRET: envField.string({ context: "server", access: "secret", optional: false }),
+    },
+  },
+
   integrations: [
     sitemap({
       filter: (page) => {
@@ -67,4 +80,6 @@ export default defineConfig({
       },
     }),
   ],
+
+  adapter: vercel(),
 });

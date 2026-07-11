@@ -1,0 +1,1 @@
+ALTER TABLE "blogs" DROP CONSTRAINT "view_must_be_positive", ADD CONSTRAINT "view_must_be_positive" CHECK ("views" >= 0);
