@@ -35,3 +35,7 @@ export const incrementView = async (key: string, lastRedisRead: Awaited<ReturnTy
   if (lastRedisRead === null) return null;
   return redis.incr(key);
 };
+
+export const setIPLockKey = (key: string) => {
+  return redis.set(key, "true", { nx: true, ex: 600 });
+};
