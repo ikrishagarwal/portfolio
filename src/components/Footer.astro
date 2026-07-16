@@ -110,8 +110,15 @@ import FooterMarker from "@/images/svg/marker.svg";
       </div>
     </div>
   </div>
-  <div class="text-gray-400 px-8 py-6 text-center font-spline-mono">
-    &copy; {new Date().getFullYear()} Krish Agarwal. All rights reserved.
+  <div class="py-6 text-center font-spline-mono">
+    <p class="text-gray-400">
+      &copy; {new Date().getFullYear()} Krish Agarwal. All rights reserved.
+    </p>
+    <p class="text-gray-600">
+      <a href="/tos" class="underline cursor-vanish">Terms Of Service</a>
+      <span> | </span>
+      <a href="/privacy-policy" class="underline cursor-vanish">Privacy Policy</a>
+    </p>
   </div>
 </footer>
 
@@ -145,7 +152,12 @@ import FooterMarker from "@/images/svg/marker.svg";
         );
       }
 
-      tl.fromTo(link, { color: "var(--color-secondary)" }, { color: "var(--color-background)", duration: 0.1 }, "-=0.2");
+      tl.fromTo(
+        link,
+        { color: "var(--color-secondary)" },
+        { color: "var(--color-background)", duration: 0.1 },
+        "-=0.2",
+      );
 
       // Remove existing listeners
       link.removeEventListener("mouseenter", handleMouseEnter);

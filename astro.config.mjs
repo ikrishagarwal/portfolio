@@ -10,7 +10,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import vercel from "@astrojs/vercel";
 
 const SITE_URL = process.env.SITE || "https://www.ikrish.dev";
-const ignoredURLs = ["/fonts/"];
+const ignoredURLs = ["/fonts/", "/tos", "/privacy-policy"];
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
